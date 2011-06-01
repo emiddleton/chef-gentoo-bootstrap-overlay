@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<use>
+	<flag name="examples">Install C++ example code.</flag>
+	<flag name="doc">Install HTML documentation.</flag>
+	<flag name="gist">Enable the Gecode Interactive Search Tool (Gist). Gist is a graphical search engine for Gecode, built on top of the Qt GUI toolkit.</flag>
+</use>
+</pkgmetadata>
