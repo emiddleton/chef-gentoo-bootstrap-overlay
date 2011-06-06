@@ -51,6 +51,11 @@ all_ruby_install() {
 	doins "${FILESDIR}/solo.rb"
 }
 
+pkg_setup() {
+	enewgroup chef
+	enewuser chef -1 -1 /var/lib/chef chef
+}
+
 pkg_postinst() {
 	elog
 	elog "You should edit /etc/chef/client.rb before starting the service with"

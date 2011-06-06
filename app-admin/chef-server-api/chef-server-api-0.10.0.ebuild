@@ -33,11 +33,6 @@ ruby_add_rdepend "~app-admin/chef-${PV}
 	>=dev-ruby/uuidtools-2.1.1
 	www-servers/thin"
 
-pkg_setup() {
-	enewgroup chef
-	enewuser chef -1 -1 /var/lib/chef chef
-}
-
 each_ruby_install() {
 	each_fakegem_install
 	ruby_fakegem_doins -r app

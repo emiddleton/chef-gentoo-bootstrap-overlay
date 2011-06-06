@@ -41,9 +41,6 @@ all_ruby_install() {
 	doinitd "${FILESDIR}/initd/chef-solr"
 	doconfd "${FILESDIR}/confd/chef-solr"
 
-	doinitd "${FILESDIR}/initd/chef-solr-indexer"
-	doconfd "${FILESDIR}/confd/chef-solr-indexer"
-
 	keepdir /etc/chef /var/lib/chef /var/log/chef /var/run/chef
 
 	insinto /etc/chef
