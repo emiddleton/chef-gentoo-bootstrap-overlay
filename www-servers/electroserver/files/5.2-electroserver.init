@@ -1,0 +1,51 @@
+#!/sbin/runscript
+# Copyright 1999-2004 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+
+depend() {
+	use dns logger net
+}
+
+start()	{
+	ebegin "Starting ElectroServer 5.2"
+		JAVA_HOME=`java-config --jre-home`
+    start-stop-daemon --start --chdir ${ELECTROSERVER_HOME}/server \
+			--verbose --background --make-pidfile --pidfile /var/run/electroserver.pid \
+			--exec $JAVA_HOME/bin/java -- \
+        -server -Dinstall4j.jvmDir=$JAVA_HOME -Dexe4j.moduleName="$ELECTROSERVER_HOME/Start_ElectroServer_5_2_SAFEMODE" \
+				-Des.admin.restart-disabled=true -Dinstall4j.launcherId=593 -Dinstall4j.swt=false \
+        -Di4j.vmov=true -Di4j.vmov=true -Di4j.vmov=true -Di4j.vmov=true -Di4j.vmov=true \
+				-classpath "$ELECTROSERVER_HOME/.install4j/i4jruntime.jar:$ELECTROSERVER_HOME/server/lib/ElectroServer5-bootstrap.jar:$ELECTROSERVER_HOME/server" \
+				com.install4j.runtime.Launcher.Launcher start com.electrotank.electroserver5.bootstrap.Main \
+				false false "" "" false true false "" true true 0 0 "" 20 20 "Arial" "0,0,0" 8 500 \
+				"version 5.2" 20 40 "Arial" "0,0,0" 8 500 -1 -config config/Configuration.xml -mode StandAlone -safemode \
+				>> /var/log/electroserver/messages.log 2>> /var/log/electroserver/errors.log
+	eend $?
+}
+
+stop()	{
+	ebegin "Stopping ElectroServer 5.2"
+	JAVA_HOME=`java-config --jre-home`
+	start-stop-daemon --stop --quiet --retry=60 \
+	  --pidfile /var/run/electroserver.pid \
+    --exec $JAVA_HOME/bin/java -- \
+      -server -Dinstall4j.jvmDir=$JAVA_HOME \
+      -classpath "$ELECTROSERVER_HOME/.install4j/i4jruntime.jar:$ELECTROSERVER_HOME/server/lib/ElectroServer5-bootstrap.jar:$ELECTROSERVER_HOME/server" \
+			com.install4j.runtime.Launcher.Launcher stop
+	eend $?
+}
+
+status() {
+  $JAVA_HOME/bin/java -server -Dinstall4j.jvmDir=$JAVA_HOME \
+    -classpath "$ELECTROSERVER_HOME/.install4j/i4jruntime.jar:$ELECTROSERVER_HOME/server/lib/ElectroServer5-bootstrap.jar:$ELECTROSERVER_HOME/server" \
+    com.install4j.runtime.Launcher.Launcher status
+}
+
+backup() {
+
+}
+
+restore() {
+}
