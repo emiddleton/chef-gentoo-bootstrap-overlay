@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+<repo quality="experimental" status="unofficial">
+        <name>chef-gentoo-bootstrap-overlay</name>
+        <description>chef bootstrapping</description>
+        <homepage>https://github.com/emiddleton/chef-gentoo-bootstrap-overlay</homepage>
+        <owner type="project">
+                <email>edward.middleton@vortorus.net</email>
+                <name>Private</name>
+        </owner>
+        <source type="git">git://github.com/emiddleton/chef-gentoo-bootstrap-overlay.git</source>
+</repo>
+</repositories>
