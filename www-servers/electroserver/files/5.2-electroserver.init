@@ -42,10 +42,3 @@ status() {
     -classpath "$ELECTROSERVER_HOME/.install4j/i4jruntime.jar:$ELECTROSERVER_HOME/server/lib/ElectroServer5-bootstrap.jar:$ELECTROSERVER_HOME/server" \
     com.install4j.runtime.Launcher.Launcher status
 }
-
-backup() {
-
-}
-
-restore() {
-}
