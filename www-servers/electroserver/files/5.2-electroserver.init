@@ -3,6 +3,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+opts="${opts} backup"
 
 depend() {
 	use dns logger net
@@ -10,7 +11,7 @@ depend() {
 
 start()	{
 	ebegin "Starting ElectroServer 5.2"
-	$ELECTROSERVER_HOME/ElectroServer_5_2_Service stop
+	$ELECTROSERVER_HOME/ElectroServer_5_2_Service start
 	eend $?
 }
 
