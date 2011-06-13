@@ -32,6 +32,9 @@ src_install() {
 	cp -r {$S,$D$ELECTROSERVER_HOME}/.install4j
 
 	cp {$S,$D$ELECTROSERVER_HOME}/Start_ElectroServer_5_2_SAFEMODE
+	cp {$S,$D$ELECTROSERVER_HOME}/ElectroServer_5_2_Service
+	cp {$S,$D$ELECTROSERVER_HOME}/DbUtility
+	
 	if use doc; then
 		dohtml -r apis/*
 	fi
