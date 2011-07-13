@@ -21,5 +21,6 @@ DEPEND="dev-python/setuptools"
 RDEPEND="${DEPEND} net-misc/s3cmd
 	sys-block/mbuffer
 	dev-libs/openssl
-	app-arch/lzop"
+	app-arch/lzop
+	dev-python/argparse"
 
