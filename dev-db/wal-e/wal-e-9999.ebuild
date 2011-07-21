@@ -20,6 +20,5 @@ IUSE=""
 DEPEND="dev-python/setuptools"
 RDEPEND="${DEPEND} net-misc/s3cmd
 	sys-block/mbuffer
-	dev-libs/openssl
 	dev-python/argparse"
 
