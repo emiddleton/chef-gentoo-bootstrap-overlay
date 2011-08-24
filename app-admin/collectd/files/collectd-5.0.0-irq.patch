@@ -1,0 +1,12 @@
+diff -ruN collectd-5.0.0.orig/src/irq.c collectd-5.0.0/src/irq.c
+--- collectd-5.0.0.orig/src/irq.c	2011-03-28 01:35:08.000000000 +0900
++++ collectd-5.0.0/src/irq.c	2011-08-24 14:01:57.910246125 +0900
+@@ -176,7 +176,7 @@
+ 			continue;
+ 
+ 		irq_value = 0;
+-		for (i = 1; i < fields_num; i++)
++		for (i = 1; i < (fields_num-1); i++)
+ 		{
+ 			/* Per-CPU value */
+ 			value_t v;
