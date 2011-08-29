@@ -1,55 +1,55 @@
-diff -ur collectd-5.0.0/src/irq.c collectd-5.0.0.new/src/irq.c
---- collectd-5.0.0/src/irq.c	2011-03-28 01:35:08.000000000 +0900
-+++ collectd-5.0.0.new/src/irq.c	2011-08-29 10:55:56.764604727 +0900
-@@ -122,10 +121,10 @@
+diff -ur collectd-5.0.0.orig/src/irq.c collectd-5.0.0/src/irq.c
+--- collectd-5.0.0.orig/src/irq.c	2011-03-28 01:35:08.000000000 +0900
++++ collectd-5.0.0/src/irq.c	2011-08-29 15:34:47.984658526 +0900
+@@ -121,10 +122,10 @@
  	value_t values[1];
  	value_list_t vl = VALUE_LIST_INIT;
  	int status;
--/*
-+
+-
++/*
  	if (check_ignore_irq (irq))
  		return;
--*/
-+
+-
++*/
  	values[0].derive = value;
  
  	vl.values = values;
-@@ -142,19 +141,6 @@
+@@ -141,6 +142,19 @@
  	plugin_dispatch_values (&vl);
  } /* void irq_submit */
  
--int irq_parse_value (const char *value, value_t *ret_value)
--{
--  char *endptr = NULL;
--  ret_value->derive = (derive_t) strtoll (value, &endptr, 0);
--  if (value == endptr) {
--    return -1;
--  }
--  else if ((NULL != endptr) && ('\0' != *endptr))
--    WARNING ("parse_value: Ignoring trailing garbage after number: %s.",
--        endptr);
--  return 0;
--} /* int irq_parse_value */
--
++int irq_parse_value (const char *value, value_t *ret_value)
++{
++  char *endptr = NULL;
++  ret_value->derive = (derive_t) strtoll (value, &endptr, 0);
++  if (value == endptr) {
++    return -1;
++  }
++  else if ((NULL != endptr) && ('\0' != *endptr))
++    WARNING ("parse_value: Ignoring trailing garbage after number: %s.",
++        endptr);
++  return 0;
++} /* int irq_parse_value */
++
  static int irq_read (void)
  {
  	FILE *fh;
-@@ -196,13 +182,16 @@
+@@ -182,16 +196,13 @@
  			value_t v;
  			int status;
  
--			status = irq_parse_value (fields[i], &v);
-+			status = parse_value (fields[i], &v, DS_TYPE_DERIVE);
+-			status = parse_value (fields[i], &v, DS_TYPE_DERIVE);
++			status = irq_parse_value (fields[i], &v);
  			if (status != 0)
  				break;
  
  			irq_value += v.derive;
  		} /* for (i) */
--		
-+
-+		if (i < fields_num)
-+			continue;
-+
+-
+-		if (i < fields_num)
+-			continue;
+-
++		
  		irq_submit (irq, irq_value);
  	}
  
