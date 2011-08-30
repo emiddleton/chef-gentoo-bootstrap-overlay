@@ -21,7 +21,7 @@ IUSE="contrib debug kernel_linux kernel_FreeBSD kernel_Darwin perl static-libs"
 COLLECTD_IMPOSSIBLE_PLUGINS="netapp pinba xmms"
 
 # Plugins that still need some work
-COLLECTD_UNTESTED_PLUGINS="ipvs apple_sensors routeros tape zfs_arc modbus amqp genericjmx lpar redis threshold varnish write_redis v5upgrade"
+COLLECTD_UNTESTED_PLUGINS="ipvs apple_sensors routeros tape zfs_arc modbus amqp genericjmx lpar redis threshold write_redis v5upgrade"
 
 # Plugins that have been (compile) tested and can be enabled via COLLECTD_PLUGINS
 COLLECTD_TESTED_PLUGINS="apache apcups ascent battery bind conntrack contextswitch
@@ -30,7 +30,7 @@ COLLECTD_TESTED_PLUGINS="apache apcups ascent battery bind conntrack contextswit
 	memcached memory multimeter mysql netlink network nfs nginx ntpd nut olsrd
 	onewire openvpn perl ping postgresql powerdns processes protocols python
 	rrdcached sensors serial snmp swap table tail tcpconns teamspeak2 ted thermal
-	tokyotyrant uptime users vmem vserver wireless csv exec logfile network
+	varnish tokyotyrant uptime users vmem vserver wireless csv exec logfile network
 	notify_desktop notify_email oracle perl python rrdcached rrdtool syslog unixsock write_http
 	match_empty_counter match_hashed match_regex match_timediff match_value
 	target_notification target_replace target_scale target_set uuid"
