@@ -21,6 +21,12 @@ stop()	{
 	eend $?
 }
 
+restart() {
+	ebegin "Restarting ElectroServer 5.2"
+  $ELECTROSERVER_HOME/ElectroServer_5_2_Service restart
+	eend $?
+}
+
 status() {
 	$ELECTROSERVER_HOME/ElectroServer_5_2_Service status
 }
