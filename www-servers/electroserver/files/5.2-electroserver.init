@@ -12,54 +12,54 @@ depend() {
 start()	{
 	ebegin "Starting ElectroServer 5.2"
 	JAVA_HOME=`java-config --jre-home`
-  start-stop-daemon --start --progress \
-    --chdir ${ELECTROSERVER_HOME}/server \
-    --wait 1000 \
-    --verbose --background \
-    --make-pidfile --pidfile /var/run/electroserver.pid \
-    --stdout /var/log/electroserver/messages.log \
-    --stderr /var/log/electroserver/errors.log \
-    --exec $JAVA_HOME/bin/java -- \
-    -server -Dinstall4j.jvmDir="$JAVA_HOME" \
-    -Dexe4j.moduleName="${ELECTROSERVER_HOME}/ElectroServer_5_2_Service" \
-    -Des.admin.restart-disabled=true \
-    -Dinstall4j.launcherId=593 \
-    -Dinstall4j.swt=false \
-    -Dcom.sun.management.jmxremote=true \
-    -Dcom.sun.management.jmxremote.port=9999 \
-    -Dcom.sun.management.jmxremote.ssl=false \
-    -Dcom.sun.management.jmxremote.authenticate=false \
-    -Di4j.vmov=true -Di4j.vmov=true -Di4j.vmov=true \
-    -Di4j.vmov=true -Di4j.vmov=true -Di4j.vpt=true \
-    -classpath "${ELECTROSERVER_HOME}/.install4j/i4jruntime.jar:${ELECTROSERVER_HOME}/server/lib/ElectroServer5-bootstrap.jar" \
-    com.install4j.runtime.launcher.Launcher start \
-    com.electrotank.electroserver5.bootstrap.Main \
-    false false "" "" false true false "" true true 0 0 "" 20 20 "Arial" \
-    "0,0,0" 8 500 "version 5.2" 20 40 "Arial" "0,0,0" 8 500 -1 \
-    -config config/Configuration.xml -mode StandAlone -safemode
+	start-stop-daemon --start --progress \
+		--chdir ${ELECTROSERVER_HOME}/server \
+		--wait 1000 \
+		--verbose --background \
+		--make-pidfile --pidfile /var/run/electroserver.pid \
+		--stdout /var/log/electroserver/messages.log \
+		--stderr /var/log/electroserver/errors.log \
+		--exec $JAVA_HOME/bin/java -- \
+		-server -Dinstall4j.jvmDir="$JAVA_HOME" \
+		-Dexe4j.moduleName="${ELECTROSERVER_HOME}/ElectroServer_5_2_Service" \
+		-Des.admin.restart-disabled=true \
+		-Dinstall4j.launcherId=593 \
+		-Dinstall4j.swt=false \
+		-Dcom.sun.management.jmxremote=true \
+		-Dcom.sun.management.jmxremote.port=9999 \
+		-Dcom.sun.management.jmxremote.ssl=false \
+		-Dcom.sun.management.jmxremote.authenticate=false \
+		-Di4j.vmov=true -Di4j.vmov=true -Di4j.vmov=true \
+		-Di4j.vmov=true -Di4j.vmov=true -Di4j.vpt=true \
+		-classpath "${ELECTROSERVER_HOME}/.install4j/i4jruntime.jar:${ELECTROSERVER_HOME}/server/lib/ElectroServer5-bootstrap.jar" \
+		com.install4j.runtime.launcher.Launcher start \
+		com.electrotank.electroserver5.bootstrap.Main \
+		false false "" "" false true false "" true true 0 0 "" 20 20 "Arial" \
+		"0,0,0" 8 500 "version 5.2" 20 40 "Arial" "0,0,0" 8 500 -1 \
+		-config config/Configuration.xml -mode StandAlone -safemode
 	eend $?
 }
 
 stop()	{
 	ebegin "Stopping ElectroServer 5.2"
-  JAVA_HOME=`java-config --jre-home`
-  $JAVA_HOME/bin/java -server \
-  start-stop-daemon --stop --retry=TERM/10/KILL/5 --progress \
-    --pidfile /var/run/electroserver.pid \
-    --exec ${JAVA_HOME}/bin/java -- \
-    -server -Dinstall4j.jvmDir="$JAVA_HOME" \
-    -Dexe4j.moduleName="${ELECTROSERVER_HOME}/ElectroServer_5_2_Service" \
-    -classpath "${ELECTROSERVER_HOME}/.install4j/i4jruntime.jar:${ELECTROSERVER_HOME}/server/lib/ElectroServer5-bootstrap.jar" \
-    com.install4j.runtime.launcher.Launcher stop	
+	JAVA_HOME=`java-config --jre-home`
+	start-stop-daemon --stop --retry=TERM/10/KILL/5 --progress \
+		--pidfile /var/run/electroserver.pid \
+		--exec ${JAVA_HOME}/bin/java -- \
+		-server -Dinstall4j.jvmDir="$JAVA_HOME" \
+		-Dexe4j.moduleName="${ELECTROSERVER_HOME}/ElectroServer_5_2_Service" \
+		-classpath "${ELECTROSERVER_HOME}/.install4j/i4jruntime.jar:${ELECTROSERVER_HOME}/server/lib/ElectroServer5-bootstrap.jar" \
+		com.install4j.runtime.launcher.Launcher stop	
 	eend $?
 }
 
 status() {
-  JAVA_HOME=`java-config --jre-home`
-  $JAVA_HOME/bin/java -server \
-    -Dinstall4j.jvmDir="${JAVA_HOME}" \
-    -Dexe4j.moduleName="${ELECTROSERVER_HOME}/ElectroServer_5_2_Service" \
-    -classpath "${ELECTROSERVER_HOME}/.install4j/i4jruntime.jar:${ELECTROSERVER_HOME}/server/lib/ElectroServer5-bootstrap.jar" \
+	JAVA_HOME=`java-config --jre-home`
+	$JAVA_HOME/bin/java -server \
+		-Dinstall4j.jvmDir="${JAVA_HOME}" \
+		-Dexe4j.moduleName="${ELECTROSERVER_HOME}/ElectroServer_5_2_Service" \
+		-classpath "${ELECTROSERVER_HOME}/.install4j/i4jruntime.jar:${ELECTROSERVER_HOME}/server/lib/ElectroServer5-bootstrap.jar" \
+		com.install4j.runtime.launcher.Launcher status
 }
 
 backup() {
