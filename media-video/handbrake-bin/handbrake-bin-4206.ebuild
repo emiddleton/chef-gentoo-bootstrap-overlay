@@ -8,12 +8,12 @@ DESCRIPTION="Open-source DVD to MPEG-4 converter"
 HOMEPAGE="http://handbrake.fr/"
 SRC_URI="
 	x86? (
-			https://edge.launchpad.net/~stebbins/+archive/handbrake-snapshots/+files/handbrake-cli_${PV}svnppa1~natty1_i386.deb
-			https://edge.launchpad.net/~stebbins/+archive/handbrake-snapshots/+files/handbrake-gtk_${PV}svnppa1~natty1_i386.deb
+			https://edge.launchpad.net/~stebbins/+archive/handbrake-snapshots/+files/handbrake-cli_${PV}svnppa1~lucid1_i386.deb
+			https://edge.launchpad.net/~stebbins/+archive/handbrake-snapshots/+files/handbrake-gtk_${PV}svnppa1~lucid1_i386.deb
 	)
 	amd64? (
-			https://edge.launchpad.net/~stebbins/+archive/handbrake-snapshots/+files/handbrake-cli_${PV}svnppa1~natty1_amd64.deb
-			https://edge.launchpad.net/~stebbins/+archive/handbrake-snapshots/+files/handbrake-gtk_${PV}svnppa1~natty1_amd64.deb
+			https://edge.launchpad.net/~stebbins/+archive/handbrake-snapshots/+files/handbrake-cli_${PV}svnppa1~lucid1_amd64.deb
+			https://edge.launchpad.net/~stebbins/+archive/handbrake-snapshots/+files/handbrake-gtk_${PV}svnppa1~lucid1_amd64.deb
 	)"
 
 LICENSE="GPL-2"
@@ -38,6 +38,4 @@ src_unpack(){
 
 src_install(){
 	cp -r usr ${D}
-	# fixme: bug in bzip2 package
-	dosym libbz2.so.1 /lib/libbz2.so.1.0
 }
