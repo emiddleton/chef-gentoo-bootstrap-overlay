@@ -34,8 +34,8 @@ ruby_add_rdepend "~app-admin/chef-${PV}
 all_ruby_install() {
 	all_fakegem_install
 
-	doinitd "${FILESDIR}/initd/chef-solr-indexer"
-	doconfd "${FILESDIR}/confd/chef-solr-indexer"
+	doinitd "${FILESDIR}/initd/chef-expander"
+	doconfd "${FILESDIR}/confd/chef-expander"
 
 	keepdir /etc/chef /var/lib/chef /var/log/chef /var/run/chef
 
