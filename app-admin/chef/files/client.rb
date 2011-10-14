@@ -48,6 +48,8 @@ chef_server_url    "http://localhost:4000"
 
 file_cache_path    "/var/lib/chef/cache"
 
+file_backup_path   "/var/lib/chef/backup"
+
 # pid_file specifies the location of where chef-client daemon should keep the pid
 # file.
 # valid value is any filesystem file location.
@@ -61,5 +63,3 @@ pid_file           "/var/run/chef/client.pid"
 # Fri, 31 Jul 2009 19:19:46 -0600
 
 Mixlib::Log::Formatter.show_time = true
-
-file_backup_path   "/var/lib/chef/backup"
