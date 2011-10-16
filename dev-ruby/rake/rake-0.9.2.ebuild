@@ -8,14 +8,14 @@ USE_RUBY="ruby18"
 RUBY_FAKEGEM_TASK_DOC=""
 RUBY_FAKEGEM_TASK_TEST=""
 
-inherit bash-completion ruby-fakegem
+inherit bash-completion-r1 ruby-fakegem
 
 DESCRIPTION="Make-like scripting in Ruby"
 HOMEPAGE="http://rake.rubyforge.org/"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~x86 ~amd64"
 IUSE="bash-completion doc"
 
 #ruby_add_bdepend test dev-ruby/flexmock
@@ -37,5 +37,5 @@ all_ruby_install() {
 
 	ruby_fakegem_binwrapper rake
 
-	dobashcompletion "${FILESDIR}"/rake.bash-completion rake
+	newbashcomp "${FILESDIR}"/rake.bash-completion rake
 }
