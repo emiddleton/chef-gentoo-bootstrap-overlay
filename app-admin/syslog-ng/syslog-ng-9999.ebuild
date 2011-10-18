@@ -8,7 +8,6 @@ inherit autotools fixheadtails eutils multilib git-2
 EGIT_REPO_URI="git://git.balabit.hu/bazsi/syslog-ng-3.3.git"
 EGIT_HAS_SUBMODULES="true"
 EGIT_BOOTSTRAP="autogen.sh"
-EGIT_COMMIT="f6e075c0d47e0d6aaeb85329d752fa3ec9b1e03a"
 
 DESCRIPTION="syslog replacement with advanced filtering features"
 HOMEPAGE="http://www.balabit.com/products/syslog_ng/"
