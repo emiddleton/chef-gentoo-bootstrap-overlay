@@ -50,10 +50,17 @@ HTTP_SLOWFS_CACHE_MODULE_PV="1.6"
 HTTP_SLOWFS_CACHE_MODULE_P="ngx_slowfs_cache-${HTTP_SLOWFS_CACHE_MODULE_PV}"
 HTTP_SLOWFS_CACHE_MODULE_URI="http://labs.frickle.com/files/${HTTP_SLOWFS_CACHE_MODULE_P}.tar.gz"
 
-# accept_language_module ( https://github.com/giom/nginx_accept_language_module )
-HTTP_ACCEPT_LANGUAGE_MODULE_PV="02262ce"
-HTTP_ACCEPT_LANGUAGE_MODULE_P="giom-nginx_accept_language_module-${HTTP_ACCEPT_LANGUAGE_MODULE_PV}"
-HTTP_ACCEPT_LANGUAGE_MODULE_URI="https://download.github.com/${HTTP_ACCEPT_LANGUAGE_MODULE_P}.tar.gz"
+# accept_language_module ( https://github.com/emiddleton/nginx_accept_language_module )
+HTTP_ACCEPT_LANGUAGE_MODULE_PV="0.0.1"
+HTTP_ACCEPT_LANGUAGE_MODULE_P="nginx_accept_language_module-${HTTP_ACCEPT_LANGUAGE_MODULE_PV}"
+HTTP_ACCEPT_LANGUAGE_MODULE_SHA1="3ad71b1"
+HTTP_ACCEPT_LANGUAGE_MODULE_URI="https://github.com/emiddleton/nginx_accept_language_module/tarball/v${HTTP_ACCEPT_LANGUAGE_MODULE_PV}"
+
+# x_rid_header ( https://github.com/emiddleton/nginx-x-rid-header )
+HTTP_X_RID_HEADER_MODULE_PV="0.0.1"
+HTTP_X_RID_HEADER_MODULE_P="nginx-x-rid-header-${HTTP_ACCEPT_LANGUAGE_MODULE_PV}"
+HTTP_X_RID_HEADER_MODULE_SHA1="ce88ca6"
+HTTP_X_RID_HEADER_MODULE_URI="https://github.com/emiddleton/nginx-x-rid-header/tarball/v${HTTP_ACCEPT_LANGUAGE_MODULE_PV}"
 
 inherit eutils ssl-cert toolchain-funcs perl-module flag-o-matic
 
@@ -66,7 +73,8 @@ SRC_URI="http://nginx.org/download/${P}.tar.gz
 	nginx_modules_http_cache_purge? ( ${HTTP_CACHE_PURGE_MODULE_URI} )
 	nginx_modules_http_upload? ( ${HTTP_UPLOAD_MODULE_URI} )
 	nginx_modules_http_slowfs_cache? ( ${HTTP_SLOWFS_CACHE_MODULE_URI} )
-	nginx_modules_http_accept_language? ( ${HTTP_ACCEPT_LANGUAGE_MODULE_URI} )"
+	nginx_modules_http_accept_language? ( ${HTTP_ACCEPT_LANGUAGE_MODULE_URI} -> ${HTTP_ACCEPT_LANGUAGE_MODULE_P}.tar.gz )
+	nginx_modules_http_x_rid_header? ( ${HTTP_X_RID_HEADER_MODULE_URI} -> ${HTTP_X_RID_HEADER_MODULE_P}.tar.gz )"
 
 LICENSE="as-is BSD BSD-2 GPL-2 MIT"
 SLOT="0"
@@ -86,7 +94,8 @@ NGINX_MODULES_3RD="
 	http_cache_purge
 	http_upload
 	http_slowfs_cache
-	http_accept_language"
+	http_accept_language
+	http_x_rid_header"
 
 IUSE="aio debug +http +http-cache ipv6 libatomic +pcre ssl vim-syntax"
 
@@ -233,7 +242,12 @@ src_configure() {
 
 	if use nginx_modules_http_accept_language; then
 		http_enabled=1
-		myconf+=" --add-module=${WORKDIR}/${HTTP_ACCEPT_LANGUAGE_MODULE_P}"
+		myconf+=" --add-module=${WORKDIR}/emiddleton-nginx_accept_language_module-${HTTP_ACCEPT_LANGUAGE_MODULE_SHA1}"
+	fi
+
+	if use nginx_modules_http_x_rid_header; then
+		http_enabled=1
+		myconf+=" --with-ld-opt=-luuid --add-module=${WORKDIR}/emiddleton-nginx-x-rid-header-${HTTP_X_RID_HEADER_MODULE_SHA1}"
 	fi
 
 	if use http || use http-cache; then
@@ -344,7 +358,12 @@ src_install() {
 
 	if use nginx_modules_http_accept_language; then
 		docinto ${HTTP_ACCEPT_LANGUAGE_MODULE_P}
-		dodoc "${WORKDIR}"/${HTTP_ACCEPT_LANGUAGE_MODULE_P}/README.textile
+		dodoc "${WORKDIR}"/emiddleton-nginx_accept_language_module-${HTTP_ACCEPT_LANGUAGE_MODULE_SHA1}/README.textile
+	fi
+
+	if use nginx_modules_http_x_rid_header; then
+		docinto ${HTTP_X_RID_HEADER_MODULE_P}
+		dodoc "${WORKDIR}"/emiddleton-nginx-x-rid-header-${HTTP_X_RID_HEADER_MODULE_SHA1}/README.md
 	fi
 }
 
