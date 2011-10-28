@@ -1,0 +1,5 @@
+APP_ROOT="/var/www/localhost/current"
+UNICORN_PID_FILE="${APP_ROOT}/tmp/pids/unicorn.pid"
+UNICORN_CONFIG_FILE="${APP_ROOT}/config/unicorn.rb"
+ENV=production
+
