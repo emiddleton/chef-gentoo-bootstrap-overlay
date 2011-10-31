@@ -27,7 +27,7 @@ S="${WORKDIR}/rails-rails-*/activemodel"
 ruby_add_rdepend "
 	~dev-ruby/activesupport-${PV}
 	>=dev-ruby/builder-2.1.2
-	>=dev-ruby/i18n-0.5.0:0.5"
+	>=dev-ruby/i18n-0.5.0"
 
 ruby_add_bdepend "
 	test? (
