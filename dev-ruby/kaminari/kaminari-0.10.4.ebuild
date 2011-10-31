@@ -22,7 +22,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="
-  dev-ruby/rails:3
+  dev-ruby/rails:3.0
 "
 RDEPEND="${DEPEND}"
 
