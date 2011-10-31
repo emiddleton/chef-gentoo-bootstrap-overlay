@@ -33,9 +33,9 @@ ruby_add_rdepend "
 	~dev-ruby/activesupport-${PV}
 	>=dev-ruby/builder-2.1.2:0
 	>=dev-ruby/erubis-2.6.6
-	>=dev-ruby/i18n-0.5.0:0.5
+	>=dev-ruby/i18n-0.4
 	>=dev-ruby/rack-1.2.1:1.2
-	>=dev-ruby/rack-mount-0.6.14
+	>=dev-ruby/rack-mount-0.6.13
 	>=dev-ruby/rack-test-0.5.7:0.5
 	>=dev-ruby/tzinfo-0.3.23"
 
