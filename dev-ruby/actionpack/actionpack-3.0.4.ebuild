@@ -32,7 +32,7 @@ ruby_add_rdepend "
 	~dev-ruby/activemodel-${PV}
 	~dev-ruby/activesupport-${PV}
 	>=dev-ruby/builder-2.1.2:0
-	>=dev-ruby/erubis-2.6.6:2.6
+	>=dev-ruby/erubis-2.6.6
 	>=dev-ruby/i18n-0.4
 	>=dev-ruby/rack-1.2.1:1.2
 	>=dev-ruby/rack-mount-0.6.13:0.6
