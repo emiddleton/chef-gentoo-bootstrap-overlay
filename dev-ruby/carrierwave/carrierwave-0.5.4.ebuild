@@ -22,6 +22,7 @@ IUSE=""
 
 DEPEND="
   dev-ruby/activesupport:3.0
+  dev-ruby/fog
 "
 RDEPEND="${DEPEND}"
 
