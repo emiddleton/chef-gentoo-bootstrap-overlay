@@ -15,7 +15,7 @@ DESCRIPTION="The Database Toolkit for Ruby"
 HOMEPAGE="http://sequel.rubyforge.org"
 
 LICENSE="MIT"
-SLOT="0"
+SLOT="3"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
