@@ -1,0 +1,11 @@
+diff --git a/lib/chef/expander/solrizer.rb b/lib/chef/expander/solrizer.rb
+--- a/lib/chef/expander/solrizer.rb
++++ b/lib/chef/expander/solrizer.rb
+@@ -108,6 +108,7 @@
+         Yajl::Parser.parse(serialized_object)
+       rescue Yajl::ParseError
+         log.error { "cannot index object because it is invalid JSON: #{serialized_object}" }
++        nil
+       end
+ 
+       def run

@@ -31,6 +31,10 @@ ruby_add_rdepend "~app-admin/chef-${PV}
 	>=dev-ruby/uuidtools-2.1.1
 	>=dev-ruby/yajl-ruby-0.7.7"
 
+all_ruby_prepare() {
+	epatch "${FILESDIR}/fix-json-crash.patch"
+}
+
 all_ruby_install() {
 	all_fakegem_install
 
