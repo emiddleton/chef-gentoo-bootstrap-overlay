@@ -16,6 +16,10 @@ inherit ruby-fakegem
 DESCRIPTION="library for using full text search from PostgreSQL "
 HOMEPAGE="http://texticle.rubyforge.org/"
 
+SRC_URI="https://github.com/han/${PN}/tarball/${PV} -> ${PN}-git-${PV}.tgz"
+S="${WORKDIR}/han-${PN}-*"
+
+
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
