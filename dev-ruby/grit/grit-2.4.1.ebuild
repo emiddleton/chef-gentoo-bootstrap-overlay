@@ -17,7 +17,7 @@ SRC_URI="https://github.com/mojombo/grit/tarball/v2.4.1 -> ${P}.tar.gz
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="doc"
 
 RDEPEND="dev-vcs/git"
