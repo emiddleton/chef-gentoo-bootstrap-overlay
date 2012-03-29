@@ -4,7 +4,7 @@
 
 EAPI=3
 
-USE_RUBY="ruby19"
+USE_RUBY="ruby18 ruby19"
 
 RUBY_FAKEGEM_EXTRADOC="README.rdoc"
 RUBY_FAKEGEM_EXTRAINSTALL="Rakefile Gemfile"
