@@ -1,0 +1,12 @@
+diff -NurB ext.orig/pg.c ext/pg.c
+--- ext.orig/pg.c	2011-10-28 14:17:08.555166949 -0700
++++ ext/pg.c	2011-10-28 14:17:35.909276684 -0700
+@@ -3758,7 +3758,7 @@
+ 
+ 	enc_index = rb_define_dummy_encoding(aliases[0]);
+ 	for (i = 1; i < sizeof(aliases)/sizeof(aliases[0]); ++i) {
+-		rb_enc_alias(aliases[i], aliases[0]);
++		rb_encdb_alias(aliases[i], aliases[0]);
+ 	}
+ 	return rb_enc_from_index(enc_index);
+ }
