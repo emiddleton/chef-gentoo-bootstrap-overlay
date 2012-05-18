@@ -7,7 +7,7 @@ EAPI=4
 USE_RUBY="ruby18"
 
 RUBY_FAKEGEM_EXTRADOC="README.md"
-RUBY_FAKEGEM_EXTRAINSTALL="templates rails spec"
+RUBY_FAKEGEM_EXTRAINSTALL="VERSION templates rails spec"
 
 inherit ruby-fakegem
 
