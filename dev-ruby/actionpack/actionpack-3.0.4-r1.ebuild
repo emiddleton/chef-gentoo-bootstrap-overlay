@@ -46,6 +46,8 @@ ruby_add_bdepend "
 	)"
 
 all_ruby_prepare() {
+	epatch "${FILESDIR}/3-0-null_param.patch"
+
 	# Set test environment to our hand.
 	rm "${S}/../Gemfile" || die "Unable to remove Gemfile"
 	sed -i -e '/\/load_paths/d' test/abstract_unit.rb || die "Unable to remove load paths"

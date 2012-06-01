@@ -1,0 +1,69 @@
+From c202638225519b5e1a03ebe523b109c948fb0e52 Mon Sep 17 00:00:00 2001
+From: Aaron Patterson <aaron.patterson@gmail.com>
+Date: Wed, 30 May 2012 15:13:03 -0700
+Subject: [PATCH] Strip [nil] from parameters hash. Thanks to Ben Murphy for
+ reporting this!
+
+CVE-2012-2660
+
+Conflicts:
+
+	actionpack/lib/action_dispatch/http/request.rb
+---
+ actionpack/lib/action_dispatch/http/request.rb     |   22 ++++++++++++++++++++
+ .../dispatch/request/query_string_parsing_test.rb  |    7 +++++-
+ 2 files changed, 28 insertions(+), 1 deletions(-)
+
+diff --git a/actionpack/lib/action_dispatch/http/request.rb b/actionpack/lib/action_dispatch/http/request.rb
+index 7c8557b..985b730 100644
+--- a/actionpack/lib/action_dispatch/http/request.rb
++++ b/actionpack/lib/action_dispatch/http/request.rb
+@@ -257,5 +257,27 @@ module ActionDispatch
+     def local?
+       LOCALHOST.any? { |local_ip| local_ip === remote_addr && local_ip === remote_ip }
+     end
++
++    protected
++
++    # Remove nils from the params hash
++    def deep_munge(hash)
++      hash.each_value do |v|
++        case v
++        when Array
++          v.grep(Hash) { |x| deep_munge(x) }
++        when Hash
++          deep_munge(v)
++        end
++      end
++
++      keys = hash.keys.find_all { |k| hash[k] == [nil] }
++      keys.each { |k| hash[k] = nil }
++      hash
++    end
++
++    def parse_query(qs)
++      deep_munge(super)
++    end
+   end
+ end
+diff --git a/actionpack/test/dispatch/request/query_string_parsing_test.rb b/actionpack/test/dispatch/request/query_string_parsing_test.rb
+index 071d80c..c7ab700 100644
+--- a/actionpack/test/dispatch/request/query_string_parsing_test.rb
++++ b/actionpack/test/dispatch/request/query_string_parsing_test.rb
+@@ -81,7 +81,12 @@ class QueryStringParsingTest < ActionController::IntegrationTest
+   end
+ 
+   test "query string without equal" do
+-    assert_parses({ "action" => nil }, "action")
++    assert_parses({"action" => nil}, "action")
++    assert_parses({"action" => {"foo" => nil}}, "action[foo]")
++    assert_parses({"action" => {"foo" => { "bar" => nil }}}, "action[foo][bar]")
++    assert_parses({"action" => {"foo" => { "bar" => nil }}}, "action[foo][bar][]")
++    assert_parses({"action" => {"foo" => nil}}, "action[foo][]")
++    assert_parses({"action"=>{"foo"=>[{"bar"=>nil}]}}, "action[foo][][bar]")
+   end
+ 
+   test "query string with empty key" do
+-- 
+1.7.5.4
+
