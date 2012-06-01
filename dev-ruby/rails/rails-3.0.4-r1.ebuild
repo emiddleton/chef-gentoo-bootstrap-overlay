@@ -25,8 +25,8 @@ RDEPEND=">=app-admin/eselect-rails-0.16"
 
 ruby_add_rdepend "
 	~dev-ruby/actionmailer-${PV}
-	~dev-ruby/actionpack-${PV}
-	~dev-ruby/activerecord-${PV}
+	=dev-ruby/actionpack-${PV}
+	=dev-ruby/activerecord-${PV}
 	~dev-ruby/activeresource-${PV}
 	~dev-ruby/activesupport-${PV}
 	=dev-ruby/bundler-1.0*
