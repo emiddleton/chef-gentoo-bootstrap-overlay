@@ -1,0 +1,66 @@
+From 99f030934eb8341db333cb6783d0f42bfa57358f Mon Sep 17 00:00:00 2001
+From: Aaron Patterson <aaron.patterson@gmail.com>
+Date: Wed, 30 May 2012 15:06:12 -0700
+Subject: [PATCH] predicate builder should not recurse for determining where
+ columns. Thanks to Ben Murphy for reporting this
+
+CVE-2012-2661
+---
+ .../active_record/relation/predicate_builder.rb    |    6 +++---
+ activerecord/test/cases/relation/where_test.rb     |   19 +++++++++++++++++++
+ 2 files changed, 22 insertions(+), 3 deletions(-)
+ create mode 100644 activerecord/test/cases/relation/where_test.rb
+
+diff --git a/activerecord/lib/active_record/relation/predicate_builder.rb b/activerecord/lib/active_record/relation/predicate_builder.rb
+index 505c3f4..84e88cf 100644
+--- a/activerecord/lib/active_record/relation/predicate_builder.rb
++++ b/activerecord/lib/active_record/relation/predicate_builder.rb
+@@ -5,17 +5,17 @@ module ActiveRecord
+       @engine = engine
+     end
+ 
+-    def build_from_hash(attributes, default_table)
++    def build_from_hash(attributes, default_table, check_column = true)
+       predicates = attributes.map do |column, value|
+         table = default_table
+ 
+         if value.is_a?(Hash)
+           table = Arel::Table.new(column, :engine => @engine)
+-          build_from_hash(value, table)
++          build_from_hash(value, table, false)
+         else
+           column = column.to_s
+ 
+-          if column.include?('.')
++          if check_column && column.include?('.')
+             table_name, column = column.split('.', 2)
+             table = Arel::Table.new(table_name, :engine => @engine)
+           end
+diff --git a/activerecord/test/cases/relation/where_test.rb b/activerecord/test/cases/relation/where_test.rb
+new file mode 100644
+index 0000000..90c690e
+--- /dev/null
++++ b/activerecord/test/cases/relation/where_test.rb
+@@ -0,0 +1,19 @@
++require "cases/helper"
++require 'models/post'
++
++module ActiveRecord
++  class WhereTest < ActiveRecord::TestCase
++    fixtures :posts
++
++    def test_where_error
++      assert_raises(ActiveRecord::StatementInvalid) do
++        Post.where(:id => { 'posts.author_id' => 10 }).first
++      end
++    end
++
++    def test_where_with_table_name
++      post = Post.first
++      assert_equal post, Post.where(:posts => { 'id' => post.id }).first
++    end
++  end
++end
+-- 
+1.7.5.4
+
