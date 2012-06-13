@@ -45,6 +45,7 @@ ruby_add_bdepend "
 all_ruby_prepare() {
 	# Set test environment to our hand.
 	epatch "${FILESDIR}/3-0-params_sql_injection.patch"
+	epatch "${FILESDIR}/3-0-sql-injection.patch"
 	
 	rm "${S}/../Gemfile" || die "Unable to remove Gemfile"
 	sed -i -e '/load_paths/d' test/cases/helper.rb || die "Unable to remove load paths"

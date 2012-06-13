@@ -1,0 +1,54 @@
+From 01cf25055226c74394f08ca356011ef520c662f1 Mon Sep 17 00:00:00 2001
+From: Aaron Patterson <aaron.patterson@gmail.com>
+Date: Sun, 10 Jun 2012 22:44:54 -0500
+Subject: [PATCH] Array parameters should not contain nil values.
+
+---
+ actionpack/lib/action_dispatch/http/request.rb     |    6 ++++--
+ .../dispatch/request/query_string_parsing_test.rb  |    4 ++++
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/actionpack/lib/action_dispatch/http/request.rb b/actionpack/lib/action_dispatch/http/request.rb
+index 985b730..04b4a21 100644
+--- a/actionpack/lib/action_dispatch/http/request.rb
++++ b/actionpack/lib/action_dispatch/http/request.rb
+@@ -262,17 +262,19 @@ module ActionDispatch
+ 
+     # Remove nils from the params hash
+     def deep_munge(hash)
++      keys = hash.keys.find_all { |k| hash[k] == [nil] }
++      keys.each { |k| hash[k] = nil }
++
+       hash.each_value do |v|
+         case v
+         when Array
+           v.grep(Hash) { |x| deep_munge(x) }
++          v.compact!
+         when Hash
+           deep_munge(v)
+         end
+       end
+ 
+-      keys = hash.keys.find_all { |k| hash[k] == [nil] }
+-      keys.each { |k| hash[k] = nil }
+       hash
+     end
+ 
+diff --git a/actionpack/test/dispatch/request/query_string_parsing_test.rb b/actionpack/test/dispatch/request/query_string_parsing_test.rb
+index c7ab700..8ea14df 100644
+--- a/actionpack/test/dispatch/request/query_string_parsing_test.rb
++++ b/actionpack/test/dispatch/request/query_string_parsing_test.rb
+@@ -89,6 +89,10 @@ class QueryStringParsingTest < ActionController::IntegrationTest
+     assert_parses({"action"=>{"foo"=>[{"bar"=>nil}]}}, "action[foo][][bar]")
+   end
+ 
++  def test_array_parses_without_nil
++    assert_parses({"action" => ['1']}, "action[]=1&action[]")
++  end
++
+   test "query string with empty key" do
+     assert_parses(
+       { "action" => "create_customer", "full_name" => "David Heinemeier Hansson" },
+-- 
+1.7.5.4
+

@@ -1,8 +1,8 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/actionpack/actionpack-3.0.7.ebuild,v 1.2 2011/07/23 07:34:11 graaff Exp $
+# $Header: $
 
-EAPI=2
+EAPI=4
 
 USE_RUBY="ruby18 ree18"
 
@@ -26,7 +26,7 @@ SLOT="3.0"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~x64-solaris ~x86-solaris"
 IUSE=""
 
-S="${WORKDIR}/rails-rails-*/actionpack"
+RUBY_S="rails-rails-*/actionpack"
 
 ruby_add_rdepend "
 	~dev-ruby/activemodel-${PV}
@@ -47,6 +47,7 @@ ruby_add_bdepend "
 
 all_ruby_prepare() {
 	epatch "${FILESDIR}/3-0-null_param.patch"
+	epatch "${FILESDIR}/3-0-null_array_param.patch"
 
 	# Set test environment to our hand.
 	rm "${S}/../Gemfile" || die "Unable to remove Gemfile"

@@ -4,7 +4,7 @@
 
 EAPI=2
 USE_RUBY="ruby18 ree18"
-
+RAILS_PV="3.0.4"
 RUBY_FAKEGEM_BINWRAP=""
 
 RUBY_FAKEGEM_TASK_DOC=""
@@ -24,13 +24,13 @@ IUSE=""
 RDEPEND=">=app-admin/eselect-rails-0.16"
 
 ruby_add_rdepend "
-	~dev-ruby/actionmailer-${PV}
-	=dev-ruby/actionpack-3.0.4-r1
-	=dev-ruby/activerecord-3.0.4-r1
-	~dev-ruby/activeresource-${PV}
-	~dev-ruby/activesupport-${PV}
+	~dev-ruby/actionmailer-${RAILS_PV}-r1
+	=dev-ruby/actionpack-${RAILS_PV}-r2
+	=dev-ruby/activerecord-${RAILS_PV}-r2
+	~dev-ruby/activeresource-${RAILS_PV}-r1
+	~dev-ruby/activesupport-${RAILS_PV}-r1
 	=dev-ruby/bundler-1.0*
-	~dev-ruby/railties-${PV}"
+	~dev-ruby/railties-${RAILS_PV}-r1"
 
 all_ruby_install() {
 	all_fakegem_install
