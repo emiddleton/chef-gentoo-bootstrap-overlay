@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-ruby/rails/rails-3.0.7.ebuild,v 1.1 2011/04/26 18:06:26 graaff Exp $
 
-EAPI=2
+EAPI=4
 USE_RUBY="ruby18 ree18"
 RAILS_PV="3.0.4"
 RUBY_FAKEGEM_BINWRAP=""
@@ -27,8 +27,8 @@ ruby_add_rdepend "
 	~dev-ruby/actionmailer-${RAILS_PV}-r1
 	=dev-ruby/actionpack-${RAILS_PV}-r2
 	=dev-ruby/activerecord-${RAILS_PV}-r2
-	~dev-ruby/activeresource-${RAILS_PV}-r1
-	~dev-ruby/activesupport-${RAILS_PV}-r1
+	~dev-ruby/activeresource-${RAILS_PV}-r2
+	~dev-ruby/activesupport-${RAILS_PV}-r2
 	=dev-ruby/bundler-1.0*
 	~dev-ruby/railties-${RAILS_PV}-r1"
 
