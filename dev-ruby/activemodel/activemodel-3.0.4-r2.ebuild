@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-ruby/activemodel/activemodel-3.0.7.ebuild,v 1.1 2011/04/26 18:01:36 graaff Exp $
 
-EAPI=2
-USE_RUBY="ruby18 ree18"
+EAPI=4
+USE_RUBY="ruby18 ruby19 ree18"
 
 RUBY_FAKEGEM_TASK_DOC=""
 RUBY_FAKEGEM_DOCDIR=""
@@ -22,7 +22,7 @@ SLOT="3.0"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~x64-solaris ~x86-solaris"
 IUSE=""
 
-S="${WORKDIR}/rails-rails-*/activemodel"
+RUBY_S="rails-rails-*/activemodel"
 
 ruby_add_rdepend "
 	~dev-ruby/activesupport-${PV}
