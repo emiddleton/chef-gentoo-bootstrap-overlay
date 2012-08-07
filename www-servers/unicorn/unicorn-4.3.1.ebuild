@@ -20,9 +20,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="
-  >=dev-ruby/kgio-2.4
+  >=dev-ruby/kgio-2.6
   dev-ruby/rack
-  >=dev-ruby/raindrops-0.6
+  >=dev-ruby/raindrops-0.7
 "
 RDEPEND="${DEPEND}"
 
