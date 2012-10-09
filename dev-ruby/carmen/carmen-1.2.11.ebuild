@@ -16,7 +16,7 @@ DESCRIPTION="Library for calculating weekly time differences between timezones"
 HOMEPAGE="https://github.com/emiddleton/carmen"
 
 EGIT_REPO_URI="git://github.com/emiddleton/${PN}.git"
-EGIT_COMMIT="14cc9423abaecfd8737050554563f2e325b95cfb"
+EGIT_COMMIT="300fd56494fe491ca187ce02604ed027aebbcac1"
 EGIT_SOURCEDIR="${WORKDIR}/all/emiddleton-${P}"
 SRC_URI=""
 
