@@ -17,7 +17,9 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-DEPEND="app-arch/bzip2"
+DEPEND="app-arch/bzip2
+	app-arch/deb2targz
+	dev-libs/fribidi"
 RDEPEND="${DEPEND}"
 
 src_unpack(){
