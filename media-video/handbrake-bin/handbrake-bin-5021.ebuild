@@ -6,7 +6,7 @@ EAPI=3
 
 DESCRIPTION="Open-source DVD to MPEG-4 converter"
 HOMEPAGE="http://handbrake.fr/"
-UBUNTU_RELEASE="lucid1"
+UBUNTU_RELEASE="maverick1"
 SRC_URI="
 	https://edge.launchpad.net/~stebbins/+archive/handbrake-snapshots/+files/handbrake-cli_${PV}svnppa1~${UBUNTU_RELEASE}_amd64.deb
 	https://edge.launchpad.net/~stebbins/+archive/handbrake-snapshots/+files/handbrake-gtk_${PV}svnppa1~${UBUNTU_RELEASE}_amd64.deb
