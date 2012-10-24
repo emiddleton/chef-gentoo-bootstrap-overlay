@@ -1,0 +1,5 @@
+APP_ROOT="/var/www/localhost/current"
+RAINBOWS_PID_FILE="${APP_ROOT}/tmp/pids/rainbows.pid"
+RAINBOWS_CONFIG_FILE="${APP_ROOT}/config/rainbows.rb"
+ENV=production
+

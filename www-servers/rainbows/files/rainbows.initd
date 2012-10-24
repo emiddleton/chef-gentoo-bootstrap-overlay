@@ -1,0 +1,137 @@
+#!/sbin/runscript
+# Copyright 1999-2011 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+opts="${opts} upgrade reload"
+
+depend() {
+	need net
+	use dns logger netmount
+}
+
+start() {
+	ebegin "Starting ${RC_SVCNAME}"
+  
+	if [ -f ${UNICORN_PID_FILE} ]; then
+		kill -0 `cat ${UNICORN_PID_FILE}` && einfo "Allready running" && return 0
+		ewarn "Removing stale pid file"
+		rm ${UNICORN_PID_FILE}
+	fi
+
+	start-stop-daemon --start --chdir ${APP_ROOT} --env PWD=${APP_ROOT} --pidfile ${UNICORN_PID_FILE} \
+		 --exec /usr/bin/bundle -- exec /usr/bin/unicorn -D -E deployment -c ${UNICORN_CONFIG_FILE}
+
+	eend $? "Failed to start ${RC_SVCNAME}"
+}
+
+stop() {
+	ebegin "Stopping ${RC_SVCNAME}"
+
+	try_signal ${UNICORN_PID_FILE}
+	if [ ${?} = 1 ]; then
+		ewarn "Not running"
+		return 0
+	fi
+
+	einfo "Sending QUIT to ${RC_SVCNAME}"
+	kill -QUIT `cat ${UNICORN_PID_FILE}`
+	if [ ${?} = 1 ]; then
+	  return 1
+	fi
+	wait_finish ${UNICORN_PID_FILE} 10 && return 0
+
+	einfo "Sending TERM to ${RC_SVCNAME}"
+	kill -TERM `cat ${UNICORN_PID_FILE}`
+	wait_finish ${UNICORN_PID_FILE} 30
+
+	eend $? "Failed to stop ${RC_SVCNAME}"
+}
+
+reload() {
+	ebegin "Reloading ${RC_SVCNAME}"
+	try_signal ${UNICORN_PID_FILE}
+	if [ ${?} = 0 ]; then
+		upgrade
+	else
+		start
+	fi
+	eend $? "Failed to reload ${RC_SVCNAME}"
+}
+
+upgrade() {
+	ebegin "Upgrading ${RC_SVCNAME}"
+
+	try_signal ${UNICORN_PID_FILE}
+	if [ ${?} = 1 ]; then
+		start && return 0
+		return 1
+	fi
+
+	einfo "Sending USR2 to old binary"
+	kill -USR2 `cat ${UNICORN_PID_FILE}`
+
+	ewaitfile 30 ${UNICORN_PID_FILE}.oldbin ${UNICORN_PID_FILE}
+	if [ ! -f ${UNICORN_PID_FILE}.oldbin ]; then
+		kill -HUP `cat ${UNICORN_PID_FILE}`
+		eerror "File with old pid not found"
+		return 1
+	fi
+
+	if [ ! -f ${UNICORN_PID_FILE} ]; then
+		eerror "New binary failed to start"
+		return 1
+	fi
+
+	einfo "Sending QUIT to old binary"
+	kill -QUIT `cat ${UNICORN_PID_FILE}.oldbin`
+
+	wait_finish ${UNICORN_PID_FILE}.oldbin 30 && einfo "Upgrade Complete" && return 0
+
+	eerror "Upgrade failed"
+	return 1
+}
+
+try_signal() {
+	if [ -f ${1} ]; then
+		local pid=`cat ${1}`
+		kill -0 $pid
+		if [ ${?} = 0 ] ; then
+			return 0
+		else
+			ewarn "Not running"
+			return 1
+		fi
+	else
+		ewarn "No pid file"
+		return 1
+	fi
+}
+
+can_signal() {
+	if [ -f ${1} ]; then
+		local pid=`cat ${1}`
+		kill -0 $pid
+		if [ ${?} = 0 ] ; then
+			return 0
+		else
+			return 1
+		fi
+	else
+		return 1
+	fi
+}
+
+wait_finish() {
+	local PID_FILE=$1
+	local timeout=$2
+	while [ ${timeout} -gt 0 ]; do
+		sleep 1
+		can_signal ${PID_FILE}
+		if [ ${?} = 1 ]; then
+			[ -f ${PID_FILE} ] && rm ${UNICORN_PID_FILE}
+			return 0
+		fi
+		: $(( timeout -= 1 ))
+	done
+}

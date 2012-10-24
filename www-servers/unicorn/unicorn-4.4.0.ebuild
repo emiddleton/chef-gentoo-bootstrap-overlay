@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=4
 
 USE_RUBY="ruby18"
 
@@ -19,12 +19,11 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="
+ruby_add_bdepend "
   >=dev-ruby/kgio-2.6
   dev-ruby/rack
   >=dev-ruby/raindrops-0.7
 "
-RDEPEND="${DEPEND}"
 
 each_ruby_configure() {
     ${RUBY} -Cext/unicorn_http extconf.rb || die "extconf.rb failed"
@@ -35,9 +34,9 @@ each_ruby_compile() {
 	cp ext/unicorn_http/unicorn_http.so lib/ || die
 }
 
-all_ruby_install(){
+all_ruby_install() {
 	all_fakegem_install
 
-	newinitd "${FILESDIR}"/unicorn.init unicorn
+	newinitd "${FILESDIR}"/unicorn.initd unicorn
 	newconfd "${FILESDIR}"/unicorn.confd unicorn
 }
