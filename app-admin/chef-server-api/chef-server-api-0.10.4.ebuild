@@ -23,8 +23,7 @@ RDEPEND=">=dev-db/couchdb-0.10.0
 
 ruby_add_rdepend "~app-admin/chef-${PV}
 	>=dev-ruby/dep_selector-0.0.3
-	>=dev-ruby/json-1.4.4
-	<=dev-ruby/json-1.4.6
+	=dev-ruby/json-1.6.4
 	>=dev-ruby/mixlib-authentication-1.1.3
 	>=dev-ruby/merb-assets-1.1.0
 	>=dev-ruby/merb-core-1.1.0
