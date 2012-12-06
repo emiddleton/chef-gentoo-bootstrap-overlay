@@ -23,7 +23,7 @@ RDEPEND=">=dev-db/couchdb-0.10.0
 
 ruby_add_rdepend "dev-ruby/coderay
 	dev-ruby/haml
-	=dev-ruby/json-1.6.4
+	dev-ruby/json:1.4
 	>=dev-ruby/merb-assets-1.1.0
 	>=dev-ruby/merb-core-1.1.0
 	>=dev-ruby/merb-haml-1.1.0
