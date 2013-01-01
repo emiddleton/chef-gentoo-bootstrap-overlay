@@ -1,17 +1,14 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Header: /var/cvsroot/gentoo-x86/app-admin/syslog-ng/syslog-ng-3.3.4.ebuild,v 1.2 2012/03/04 22:16:44 mr_bones_ Exp $
 
 EAPI=2
-inherit autotools fixheadtails eutils multilib git-2
+inherit autotools eutils multilib
 
-EGIT_REPO_URI="git://git.balabit.hu/bazsi/syslog-ng-3.3.git"
-EGIT_HAS_SUBMODULES="true"
-EGIT_BOOTSTRAP="autogen.sh"
-
+MY_PV=${PV/_/}
 DESCRIPTION="syslog replacement with advanced filtering features"
 HOMEPAGE="http://www.balabit.com/products/syslog_ng/"
-SRC_URI=""
+SRC_URI="http://www.balabit.com/downloads/files/syslog-ng/sources/${MY_PV}/source/syslog-ng_${MY_PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -39,9 +36,11 @@ DEPEND="${RDEPEND}
 	dev-util/pkgconfig
 	sys-devel/flex"
 
+S=${WORKDIR}/${PN}-${MY_PV}
+
 src_prepare() {
-	ht_fix_file configure.in
-	touch ${S}/README
+	epatch "${FILESDIR}"/${P}-compile.patch
+	sed -i -e '/libsyslog_ng_crypto_la_LIBADD/s/$/ -lssl -lcrypto/' lib/Makefile.am || die
 	eautoreconf
 }
 
@@ -77,7 +76,7 @@ src_configure() {
 src_install() {
 	emake DESTDIR="${D}" install || die "emake install failed"
 
-	dodoc AUTHORS ChangeLog NEWS README \
+	dodoc AUTHORS ChangeLog NEWS \
 		contrib/syslog-ng.conf* \
 		contrib/syslog2ng "${FILESDIR}/syslog-ng.conf."*
 
@@ -99,14 +98,17 @@ src_install() {
 		newins "${FILESDIR}/syslog-ng.logrotate" syslog-ng || die
 	fi
 
-	newinitd "${FILESDIR}/syslog-ng.rc6.${PV%%.*}" syslog-ng || die
+	newinitd "${FILESDIR}/syslog-ng.rc6.${PV%.*}" syslog-ng || die
 	newconfd "${FILESDIR}/syslog-ng.confd" syslog-ng || die
 	keepdir /etc/syslog-ng/patterndb.d
 	find "${D}" -type f -name '*.la' -exec rm {} + || die
-#	rmdir "${D}"/usr/libexec
+	rmdir "${D}"/usr/libexec
 }
 
 pkg_postinst() {
+	elog "For detailed documentation please see the upstream website:"
+	elog "http://www.balabit.com/sites/default/files/documents/syslog-ng-ose-3.3-guides/syslog-ng-ose-v3.3-guide-admin-en.html/index.html"
+
 	# bug #355257
 	if ! has_version app-admin/logrotate ; then
 		echo
