@@ -14,7 +14,7 @@ RUBY_FAKEGEM_GEMSPEC="activeresource.gemspec"
 
 inherit ruby-fakegem versionator
 
-RAILS_PV="$(get_version_component_range 1-2)"
+RAILS_PV="$(get_version_component_range 1-3)"
 
 DESCRIPTION="Think Active Record for web resources.."
 HOMEPAGE="http://rubyforge.org/projects/activeresource/"
