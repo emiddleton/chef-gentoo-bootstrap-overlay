@@ -4,7 +4,6 @@
 
 EAPI=4
 USE_RUBY="ruby18 ree18"
-RAILS_PV="3.0.4"
 RUBY_FAKEGEM_BINWRAP=""
 
 RUBY_FAKEGEM_TASK_DOC=""
@@ -12,11 +11,13 @@ RUBY_FAKEGEM_TASK_TEST=""
 
 inherit ruby-fakegem
 
+RAILS_PV="$(get_version_component_range 1-3)"
+
 DESCRIPTION="ruby on rails is a web-application and persistance framework"
 HOMEPAGE="http://www.rubyonrails.org"
 
 LICENSE="MIT"
-SLOT="3.0"
+SLOT="${RAILS_PV}"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~x64-solaris ~x86-solaris"
 
 IUSE=""
@@ -24,13 +25,13 @@ IUSE=""
 RDEPEND=">=app-admin/eselect-rails-0.16"
 
 ruby_add_rdepend "
-	~dev-ruby/actionmailer-${RAILS_PV}-r1
-	=dev-ruby/actionpack-${RAILS_PV}-r2
-	=dev-ruby/activerecord-${RAILS_PV}-r2
-	~dev-ruby/activeresource-${RAILS_PV}-r2
-	~dev-ruby/activesupport-${RAILS_PV}-r2
+	dev-ruby/actionmailer:${RAILS_PV}
+	dev-ruby/actionpack:${RAILS_PV}
+	dev-ruby/activerecord:${RAILS_PV}
+	dev-ruby/activeresource:${RAILS_PV}
+	dev-ruby/activesupport:${RAILS_PV}
 	=dev-ruby/bundler-1.0*
-	~dev-ruby/railties-${RAILS_PV}-r1"
+	dev-ruby/railties:${RAILS_PV}"
 
 all_ruby_install() {
 	all_fakegem_install

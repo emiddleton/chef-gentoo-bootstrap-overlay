@@ -13,12 +13,14 @@ RUBY_FAKEGEM_GEMSPEC="activesupport.gemspec"
 
 inherit ruby-fakegem versionator
 
+RAILS_PV="$(get_version_component_range 1-3)"
+
 DESCRIPTION="Utility Classes and Extension to the Standard Library"
 HOMEPAGE="http://rubyforge.org/projects/activesupport/"
 SRC_URI="https://github.com/rails/rails/tarball/v${PV} -> rails-${PV}.tgz"
 
 LICENSE="MIT"
-SLOT="$(get_version_component_range 1-2)"
+SLOT="${RAILS_PV}"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~x64-solaris ~x86-solaris"
 IUSE=""
 
@@ -36,6 +38,7 @@ all_ruby_prepare() {
 	# don't support older mocha versions as the optional codepath
 	# breaks JRuby
 	epatch "${FILESDIR}"/${PN}-3.0.3-mocha-0.9.5.patch
+	epatch "${FILESDIR}"/3-0-xml_parsing.patch
 
 	# Set test environment to our hand.
 	rm "${S}/../Gemfile" || die "Unable to remove Gemfile"

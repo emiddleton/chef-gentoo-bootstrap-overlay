@@ -1,0 +1,53 @@
+diff --git a/activerecord/lib/active_record/relation/predicate_builder.rb b/activerecord/lib/active_record/relation/predicate_builder.rb
+index e74ba73..71eabcb 100644
+--- a/activerecord/lib/active_record/relation/predicate_builder.rb
++++ b/activerecord/lib/active_record/relation/predicate_builder.rb
+@@ -11,7 +11,12 @@ module ActiveRecord
+ 
+         if allow_table_name && value.is_a?(Hash)
+           table = Arel::Table.new(column, :engine => @engine)
+-          build_from_hash(value, table, false)
++
++          if value.empty?
++            '1 = 2'
++          else
++            build_from_hash(value, table, false)
++          end
+         else
+           column = column.to_s
+ 
+diff --git a/activerecord/test/cases/relation/where_test.rb b/activerecord/test/cases/relation/where_test.rb
+index b9eef1d..8015833 100644
+--- a/activerecord/test/cases/relation/where_test.rb
++++ b/activerecord/test/cases/relation/where_test.rb
+@@ -1,9 +1,11 @@
+ require "cases/helper"
+ require 'models/post'
++require 'models/comment'
++require 'models/edge'
+ 
+ module ActiveRecord
+   class WhereTest < ActiveRecord::TestCase
+-    fixtures :posts
++    fixtures :posts, :edges
+ 
+     def test_where_error
+       assert_raises(ActiveRecord::StatementInvalid) do
+@@ -21,5 +23,17 @@ module ActiveRecord
+       post = Post.first
+       assert_equal post, Post.where(:posts => { 'id' => post.id }).first
+     end
++
++    def test_where_with_table_name_and_empty_hash
++      assert_equal 0, Post.where(:posts => {}).count
++    end
++
++    def test_where_with_table_name_and_empty_array
++      assert_equal 0, Post.where(:id => []).count
++    end
++
++    def test_where_with_empty_hash_and_no_foreign_key
++      assert_equal 0, Edge.where(:sink => {}).count
++    end
+   end
+ end

@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-ruby/railties/railties-3.0.7.ebuild,v 1.1 2011/04/26 18:05:55 graaff Exp $
 
-EAPI=2
+EAPI=4
 USE_RUBY="ruby18 ree18"
 
 RUBY_FAKEGEM_TASK_TEST="test:regular"
@@ -14,16 +14,18 @@ RUBY_FAKEGEM_GEMSPEC="railties.gemspec"
 
 inherit ruby-fakegem
 
+RAILS_PV="$(get_version_component_range 1-3)"
+
 DESCRIPTION="Tools for creating, working with, and running Rails applications."
 HOMEPAGE="http://github.com/rails/rails"
 SRC_URI="http://github.com/rails/rails/tarball/v${PV} -> rails-${PV}.tgz"
 
 LICENSE="MIT"
-SLOT="3.0"
+SLOT="${RAILS_PV}"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~x64-solaris ~x86-solaris"
 IUSE=""
 
-S="${WORKDIR}/rails-rails-*/railties"
+RUBY_S="rails-rails-*/railties"
 
 # The test suite has many failures, most likely due to a mismatch in
 # exact dependencies or environment specifics. Needs further
@@ -31,8 +33,8 @@ S="${WORKDIR}/rails-rails-*/railties"
 RESTRICT="test"
 
 ruby_add_rdepend "
-	~dev-ruby/activesupport-${PV}
-	~dev-ruby/actionpack-${PV}
+	dev-ruby/activesupport:${RAILS_PV}
+	dev-ruby/actionpack:${RAILS_PV}
 	>=dev-ruby/thor-0.14.4
 	>=dev-ruby/rake-0.8.7"
 

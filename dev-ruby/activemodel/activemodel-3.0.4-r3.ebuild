@@ -13,19 +13,21 @@ RUBY_FAKEGEM_GEMSPEC="activemodel.gemspec"
 
 inherit ruby-fakegem
 
+RAILS_PV="$(get_version_component_range 1-3)"
+
 DESCRIPTION="A toolkit for building modeling frameworks like Active Record and Active Resource."
 HOMEPAGE="http://github.com/rails/rails"
 SRC_URI="http://github.com/rails/rails/tarball/v${PV} -> rails-${PV}.tgz"
 
 LICENSE="MIT"
-SLOT="3.0"
+SLOT="${RAILS_PV}"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~x64-solaris ~x86-solaris"
 IUSE=""
 
 RUBY_S="rails-rails-*/activemodel"
 
 ruby_add_rdepend "
-	~dev-ruby/activesupport-${PV}
+	dev-ruby/activesupport:${RAILS_PV}
 	>=dev-ruby/builder-2.1.2
 	>=dev-ruby/i18n-0.5.0"
 

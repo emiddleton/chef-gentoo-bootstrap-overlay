@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/activeresource/activeresource-3.0.7.ebuild,v 1.1 2011/04/26 18:02:10 graaff Exp $
+# $Header: $
 
 EAPI=4
 
@@ -14,19 +14,21 @@ RUBY_FAKEGEM_GEMSPEC="activeresource.gemspec"
 
 inherit ruby-fakegem versionator
 
+RAILS_PV="$(get_version_component_range 1-2)"
+
 DESCRIPTION="Think Active Record for web resources.."
 HOMEPAGE="http://rubyforge.org/projects/activeresource/"
 SRC_URI="http://github.com/rails/rails/tarball/v${PV} -> rails-${PV}.tgz"
 
 LICENSE="MIT"
-SLOT="$(get_version_component_range 1-2)"
+SLOT="${RAILS_PV}"
 KEYWORDS="~amd64 ~x86 ~x86-freebsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~x64-solaris ~x86-solaris"
 IUSE=""
 
 RUBY_S="rails-rails-*/activeresource"
 
-ruby_add_rdepend "~dev-ruby/activesupport-${PV}
-	~dev-ruby/activemodel-${PV}"
+ruby_add_rdepend "dev-ruby/activesupport:${RAILS_PV}
+	dev-ruby/activemodel:${RAILS_PV}"
 ruby_add_bdepend "
 	test? (
 		>=dev-ruby/mocha-0.9.5

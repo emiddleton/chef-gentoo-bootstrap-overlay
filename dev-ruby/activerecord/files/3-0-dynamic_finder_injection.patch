@@ -1,0 +1,54 @@
+From 3542641ebd83a31f6b633b7af30ae6f37e563a1b Mon Sep 17 00:00:00 2001
+From: Aaron Patterson <aaron.patterson@gmail.com>
+Date: Sun, 23 Dec 2012 11:07:07 -0800
+Subject: [PATCH] CVE-2012-5664 options hashes should only be extracted if
+ there are extra parameters
+
+---
+ activerecord/lib/active_record/base.rb |    6 +++++-
+ activerecord/test/cases/finder_test.rb |   12 ++++++++++++
+ 2 files changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/activerecord/lib/active_record/base.rb b/activerecord/lib/active_record/base.rb
+index f89b949..a05623d 100644
+--- a/activerecord/lib/active_record/base.rb
++++ b/activerecord/lib/active_record/base.rb
+@@ -988,7 +988,11 @@ module ActiveRecord #:nodoc:
+             attribute_names = match.attribute_names
+             super unless all_attributes_exists?(attribute_names)
+             if match.finder?
+-              options = arguments.extract_options!
++              options = if arguments.length > attribute_names.size
++                          arguments.extract_options!
++                        else
++                          {}
++                        end
+               relation = options.any? ? construct_finder_arel(options, current_scoped_methods) : scoped
+               relation.send :find_by_attributes, match, attribute_names, *arguments
+             elsif match.instantiator?
+diff --git a/activerecord/test/cases/finder_test.rb b/activerecord/test/cases/finder_test.rb
+index 68b03a4..0705f15 100644
+--- a/activerecord/test/cases/finder_test.rb
++++ b/activerecord/test/cases/finder_test.rb
+@@ -65,6 +65,18 @@ end
+ class FinderTest < ActiveRecord::TestCase
+   fixtures :companies, :topics, :entrants, :developers, :developers_projects, :posts, :comments, :accounts, :authors, :customers, :categories, :categorizations
+ 
++  def test_find_by_id_with_hash
++    assert_raises(ActiveRecord::StatementInvalid) do
++      Post.find_by_id(:limit => 1)
++    end
++  end
++
++  def test_find_by_title_and_id_with_hash
++    assert_raises(ActiveRecord::StatementInvalid) do
++      Post.find_by_title_and_id('foo', :limit => 1)
++    end
++  end
++
+   def test_find
+     assert_equal(topics(:first).title, Topic.find(1).title)
+   end
+-- 
+1.7.10.2 (Apple Git-33)
+
