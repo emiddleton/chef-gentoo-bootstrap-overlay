@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=4
 
 USE_RUBY="ruby18"
 
@@ -22,10 +22,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="
+ruby_add_bdepend "
   >=dev-ruby/sequel-3.13:3
-  >=dev-ruby/actionpack-3.0.4
-  >=dev-ruby/activesupport-3.0.4
-  >=dev-ruby/railties-3.0.4"
-RDEPEND="${DEPEND}"
+  ~dev-ruby/actionpack-3.0
+  ~dev-ruby/activesupport-3.0
+  ~dev-ruby/railties-3.0"
 
