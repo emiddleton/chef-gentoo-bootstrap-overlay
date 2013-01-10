@@ -29,7 +29,7 @@ RUBY_S="rails-rails-*/${PN}"
 # libxml-ruby and nokogiri are not strictly needed, but there are tests
 # using this code.
 ruby_add_bdepend "test? (
-	!<dev-ruby/active-support-${PV}
+	!dev-ruby/active-support:3.0
     virtual/ruby-test-unit
 	>=dev-ruby/libxml-2.0.0
 	dev-ruby/nokogiri

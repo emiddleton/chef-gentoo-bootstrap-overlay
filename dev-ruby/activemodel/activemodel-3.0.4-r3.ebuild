@@ -27,7 +27,8 @@ IUSE=""
 RUBY_S="rails-rails-*/activemodel"
 
 ruby_add_rdepend "
-	dev-ruby/activesupport:${RAILS_PV}
+    !dev-ruby/activesupport:3.0
+    dev-ruby/activesupport:${RAILS_PV}
 	>=dev-ruby/builder-2.1.2
 	>=dev-ruby/i18n-0.5.0"
 
