@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/actionmailer/actionmailer-3.0.7.ebuild,v 1.1 2011/04/26 18:04:55 graaff Exp $
+# $Header: $
 
 EAPI=4
 USE_RUBY="ruby18 ree18"
@@ -25,7 +25,9 @@ IUSE=""
 
 RUBY_S="rails-rails-*/actionmailer"
 
-ruby_add_rdepend "dev-ruby/actionpack:${RAILS_PV}
+ruby_add_rdepend "
+    !<dev-ruby/actionmailer-3.0.4-r2
+    dev-ruby/actionpack:${RAILS_PV}
 	>=dev-ruby/mail-2.2.15"
 ruby_add_bdepend "test? (
 	>=dev-ruby/mocha-0.9.5

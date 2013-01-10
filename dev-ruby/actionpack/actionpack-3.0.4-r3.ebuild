@@ -31,6 +31,7 @@ IUSE=""
 RUBY_S="rails-rails-*/actionpack"
 
 ruby_add_rdepend "
+	!<dev-ruby/actionpack-3.0.4-r3
 	dev-ruby/activemodel:${RAILS_PV}
 	dev-ruby/activesupport:${RAILS_PV}
 	>=dev-ruby/builder-2.1.2:0
@@ -43,7 +44,7 @@ ruby_add_rdepend "
 
 ruby_add_bdepend "
 	test? (
-	    dev-ruby/activerecord:${RAILS_PV}
+		dev-ruby/activerecord:${RAILS_PV}
 		dev-ruby/actionmailer:${RAILS_PV}
 	)"
 

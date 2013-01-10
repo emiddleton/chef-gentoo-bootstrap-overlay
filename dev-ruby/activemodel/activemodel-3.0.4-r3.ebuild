@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/activemodel/activemodel-3.0.7.ebuild,v 1.1 2011/04/26 18:01:36 graaff Exp $
+# $Header: $
 
 EAPI=4
 USE_RUBY="ruby18 ruby19 ree18"
@@ -27,7 +27,7 @@ IUSE=""
 RUBY_S="rails-rails-*/activemodel"
 
 ruby_add_rdepend "
-    !<=dev-ruby/activemodel-3.0.4-r2
+    !<dev-ruby/activemodel-3.0.4-r3
     dev-ruby/activesupport:${RAILS_PV}
 	>=dev-ruby/builder-2.1.2
 	>=dev-ruby/i18n-0.5.0"

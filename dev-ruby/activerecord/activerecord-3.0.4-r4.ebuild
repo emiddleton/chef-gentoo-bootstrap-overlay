@@ -28,7 +28,9 @@ IUSE="mysql postgres sqlite3"
 
 RUBY_S="rails-rails-*/${PN}"
 
-ruby_add_rdepend "dev-ruby/activesupport:${RAILS_PV}
+ruby_add_rdepend "
+    !<dev-ruby/activerecord-3.0.4-r4
+    dev-ruby/activesupport:${RAILS_PV}
 	dev-ruby/activemodel:${RAILS_PV}
 	>=dev-ruby/arel-2.0.2:2.0
 	>=dev-ruby/tzinfo-0.3.23

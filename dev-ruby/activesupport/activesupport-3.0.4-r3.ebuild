@@ -1,6 +1,6 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-ruby/activesupport/activesupport-3.0.7.ebuild,v 1.1 2011/04/26 18:00:52 graaff Exp $
+# $Header: $
 
 EAPI=4
 USE_RUBY="ruby18 ree18 ruby19"
@@ -29,8 +29,8 @@ RUBY_S="rails-rails-*/${PN}"
 # libxml-ruby and nokogiri are not strictly needed, but there are tests
 # using this code.
 ruby_add_bdepend "test? (
-	!dev-ruby/active-support:3.0
-    virtual/ruby-test-unit
+	!<dev-ruby/activesupport-3.0.4-r3
+	virtual/ruby-test-unit
 	>=dev-ruby/libxml-2.0.0
 	dev-ruby/nokogiri
 	)"

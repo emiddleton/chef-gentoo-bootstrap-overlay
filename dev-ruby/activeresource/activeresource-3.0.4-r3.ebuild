@@ -27,7 +27,9 @@ IUSE=""
 
 RUBY_S="rails-rails-*/activeresource"
 
-ruby_add_rdepend "dev-ruby/activesupport:${RAILS_PV}
+ruby_add_rdepend "
+	!<dev-ruby/activeresource-3.0.4-r3
+	dev-ruby/activesupport:${RAILS_PV}
 	dev-ruby/activemodel:${RAILS_PV}"
 ruby_add_bdepend "
 	test? (
