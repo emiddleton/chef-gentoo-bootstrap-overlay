@@ -66,6 +66,18 @@ HTTP_SLOWFS_CACHE_MODULE_P="ngx_http_slowfs_cache-${HTTP_SLOWFS_CACHE_MODULE_PV}
 HTTP_SLOWFS_CACHE_MODULE_URI="http://labs.frickle.com/files/ngx_slowfs_cache-${HTTP_SLOWFS_CACHE_MODULE_PV}.tar.gz"
 HTTP_SLOWFS_CACHE_MODULE_WD="${WORKDIR}/ngx_slowfs_cache-${HTTP_SLOWFS_CACHE_MODULE_PV}"
 
+# accept_language_module ( https://github.com/emiddleton/nginx_accept_language_module )
+HTTP_ACCEPT_LANGUAGE_MODULE_PV="0.0.1"
+HTTP_ACCEPT_LANGUAGE_MODULE_P="nginx_accept_language_module-${HTTP_ACCEPT_LANGUAGE_MODULE_PV}"
+HTTP_ACCEPT_LANGUAGE_MODULE_URI="https://github.com/emiddleton/nginx_accept_language_module/archive/v${HTTP_ACCEPT_LANGUAGE_MODULE_PV}.tar.gz"
+HTTP_ACCEPT_LANGUAGE_MODULE_WD="${WORKDIR}/emiddleton-nginx_accept_language_module-3ad71b1"
+
+# x_rid_header ( https://github.com/emiddleton/nginx-x-rid-header )
+HTTP_X_RID_HEADER_MODULE_PV="0.0.1"
+HTTP_X_RID_HEADER_MODULE_P="nginx-x-rid-header-${HTTP_ACCEPT_LANGUAGE_MODULE_PV}"
+HTTP_X_RID_HEADER_MODULE_URI="https://github.com/emiddleton/nginx-x-rid-header/archive/v${HTTP_ACCEPT_LANGUAGE_MODULE_PV}.tar.gz"
+HTTP_X_RID_HEADER_MODULE_WD="${WORKDIR}/emiddleton-nginx-x-rid-header-ce88ca6"
+
 # http_fancyindex (http://wiki.nginx.org/NgxFancyIndex, BSD license)
 HTTP_FANCYINDEX_MODULE_PV="0.3.1.1"
 HTTP_FANCYINDEX_MODULE_P="ngx_http_fancyindex-${HTTP_FANCYINDEX_MODULE_PV}"
@@ -97,6 +109,8 @@ SRC_URI="http://nginx.org/download/${P}.tar.gz
 	nginx_modules_http_cache_purge? ( ${HTTP_CACHE_PURGE_MODULE_URI} -> ${HTTP_CACHE_PURGE_MODULE_P}.tar.gz )
 	nginx_modules_http_upload? ( ${HTTP_UPLOAD_MODULE_URI} -> ${HTTP_UPLOAD_MODULE_P}.tar.gz )
 	nginx_modules_http_slowfs_cache? ( ${HTTP_SLOWFS_CACHE_MODULE_URI} -> ${HTTP_SLOWFS_CACHE_MODULE_P}.tar.gz )
+	nginx_modules_http_accept_language? ( ${HTTP_ACCEPT_LANGUAGE_MODULE_URI} -> ${HTTP_ACCEPT_LANGUAGE_MODULE_P}.tar.gz )
+	nginx_modules_http_x_rid_header? ( ${HTTP_X_RID_HEADER_MODULE_URI} -> ${HTTP_X_RID_HEADER_MODULE_P}.tar.gz )
 	nginx_modules_http_fancyindex? ( ${HTTP_FANCYINDEX_MODULE_URI} -> ${HTTP_FANCYINDEX_MODULE_P}.tar.gz )
 	nginx_modules_http_lua? ( ${HTTP_LUA_MODULE_URI} -> ${HTTP_LUA_MODULE_P}.tar.gz )
 	nginx_modules_http_auth_pam? ( ${HTTP_AUTH_PAM_MODULE_URI} -> ${HTTP_AUTH_PAM_MODULE_P}.tar.gz )"
@@ -118,6 +132,8 @@ NGINX_MODULES_3RD="
 	http_cache_purge
 	http_upload
 	http_slowfs_cache
+	http_accept_language
+	http_x_rid_header
 	http_fancyindex
 	http_lua
 	http_auth_pam"
@@ -265,6 +281,17 @@ src_configure() {
 		myconf+=" --add-module=${HTTP_SLOWFS_CACHE_MODULE_WD}"
 	fi
 
+	if use nginx_modules_http_accept_language; then
+		http_enabled=1
+		myconf+="
+		--add-module=${HTTP_ACCEPT_LANGUAGE_MODULE_WD}"
+	fi
+
+	if use nginx_modules_http_x_rid_header; then
+		http_enabled=1
+		myconf+=" --with-ld-opt=-luuid --add-module=${HTTP_X_RID_HEADER_MODULE_WD}"
+	fi
+
 	if use nginx_modules_http_fancyindex; then
 		http_enabled=1
 		myconf+=" --add-module=${HTTP_FANCYINDEX_MODULE_WD}"
@@ -390,6 +417,16 @@ src_install() {
 		docinto ${HTTP_SLOWFS_CACHE_MODULE_P}
 		dodoc "${HTTP_SLOWFS_CACHE_MODULE_WD}"/{CHANGES,README.md}
 	fi
+
+	if use nginx_modules_http_accept_language; then
+		docinto ${HTTP_ACCEPT_LANGUAGE_MODULE_P}
+		dodoc "${HTTP_ACCEPT_LANGUAGE_MODULE_WD}"/README.textile
+	fi
+
+	if use nginx_modules_http_x_rid_header; then
+		docinto ${HTTP_X_RID_HEADER_MODULE_P}
+		dodoc "${HTTP_X_RID_HEADER_MODULE_WD}"/README.md
+    fi
 
 	if use nginx_modules_http_fancyindex; then
 		docinto ${HTTP_FANCYINDEX_MODULE_P}
