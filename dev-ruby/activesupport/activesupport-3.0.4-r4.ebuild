@@ -40,6 +40,7 @@ all_ruby_prepare() {
 	# breaks JRuby
 	epatch "${FILESDIR}"/${PN}-3.0.3-mocha-0.9.5.patch
 	epatch "${FILESDIR}"/3-0-xml_parsing.patch
+	epatch "${FILESDIR}"/3-0-json-parser.patch
 
 	# Set test environment to our hand.
 	rm "${S}/../Gemfile" || die "Unable to remove Gemfile"
