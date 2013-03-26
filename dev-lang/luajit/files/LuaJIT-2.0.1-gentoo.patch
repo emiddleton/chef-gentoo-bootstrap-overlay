@@ -12,9 +12,10 @@ diff -ru LuaJIT-2.0.1.orig/etc/luajit.pc LuaJIT-2.0.1/etc/luajit.pc
 +prefix=/usr
  exec_prefix=${prefix}
 -libdir=${exec_prefix}/lib
-+libdir=${exec_prefix}/@LIBDIR@
- libname=luajit-${abiver}
+-libname=luajit-${abiver}
 -includedir=${prefix}/include/luajit-${majver}.${minver}
++libdir=${exec_prefix}/@LIBDIR@
++libname=luajit-${majver}.${minver}
 +includedir=${prefix}/include/luajit-@SHORTVER@
  
  INSTALL_LMOD=${prefix}/share/lua/${abiver}
@@ -129,16 +130,17 @@ diff -ru LuaJIT-2.0.1.orig/src/luaconf.h LuaJIT-2.0.1/src/luaconf.h
  #define LUA_XPATH
  #define LUA_XCPATH
  #endif
-Only in LuaJIT-2.0.1/src: .luaconf.h.swp
 diff -ru LuaJIT-2.0.1.orig/src/Makefile LuaJIT-2.0.1/src/Makefile
 --- LuaJIT-2.0.1.orig/src/Makefile	2013-03-24 06:19:15.875738130 +0900
 +++ LuaJIT-2.0.1/src/Makefile	2013-03-24 09:33:44.311423862 +0900
-@@ -13,8 +13,9 @@
+@@ -12,9 +12,10 @@
+ 
  MAJVER=  2
  MINVER=  0
- RELVER=  0
+-RELVER=  0
 -ABIVER=  5.1
 -NODOTABIVER= 51
++RELVER=  1
 +SHORTVER= $(MAJVER).$(MINVER)
 +NODOTSHORTVER=  $(MAJVER)$(MINVER)
 +LIBDIR ?= lib
