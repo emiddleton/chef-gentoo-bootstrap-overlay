@@ -30,7 +30,7 @@ ruby_add_rdepend "virtual/ruby-ssl"
 ruby_add_bdepend "test? ( dev-ruby/bacon dev-ruby/fcgi )"
 
 # Block against versions in older slots that also try to install a binary.
-RDEPEND="${RDEPEND} !<dev-ruby/rack-1.1.3-r1:0 !<dev-ruby/rack-1.2.5:1.2 !<dev-ruby/rack-1.3.6-r1:1.3"
+RDEPEND="${RDEPEND} >=app-admin/eselect-rack-0.1 !<dev-ruby/rack-1.1.3-r1:0"
 
 each_ruby_test() {
 	# Since the Rakefile calls specrb directly rather than loading it, we
@@ -39,4 +39,21 @@ each_ruby_test() {
 	${RUBY} -S bacon -Ilib -w -a \
 		-q -t '^(?!Rack::Handler|Rack::Adapter|Rack::Session::Memcache|Rack::Server)' \
 		|| die "test failed for ${RUBY}"
+}
+
+all_ruby_install() {
+	all_fakegem_install
+
+	ruby_fakegem_binwrapper rackup rackup-${PV}
+}
+
+pkg_postinst() {
+	elog "To select between slots of rack, use:"
+	elog "\teselect rack"
+
+	eselect rack update
+}
+
+pkg_postrm() {
+	eselect rack update
 }
