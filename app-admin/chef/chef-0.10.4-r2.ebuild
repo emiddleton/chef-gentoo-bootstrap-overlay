@@ -36,6 +36,10 @@ ruby_add_rdepend ">=dev-ruby/bunny-0.6.0
 	>=dev-ruby/treetop-1.4.9
 	dev-ruby/uuidtools"
 
+all_ruby_prepare() {
+	epatch "${FILESDIR}/fix-json-to-1.6.4.patch"
+}
+
 all_ruby_install() {
 	all_fakegem_install
 

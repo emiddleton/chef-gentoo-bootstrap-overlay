@@ -1,0 +1,12 @@
+diff -ur chef-0.10.4.orig/lib/chef/json_compat.rb chef-0.10.4/lib/chef/json_compat.rb
+--- chef-0.10.4.orig/lib/chef/json_compat.rb	2013-04-01 16:39:59.982833782 +0900
++++ chef-0.10.4/lib/chef/json_compat.rb	2013-04-01 16:40:45.919061568 +0900
+@@ -17,6 +17,7 @@
+ 
+ # Wrapper class for interacting with JSON.
+ 
++gem 'json', '= 1.6.4'
+ require 'json'
+ 
+ class Chef
+Only in chef-0.10.4/lib/chef: .json_compat.rb.swp
