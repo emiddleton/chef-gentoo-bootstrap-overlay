@@ -22,5 +22,5 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 ruby_add_rdepend "
-  >=dev-ruby/rack-1.0.0
+  >=dev-ruby/rack-1.3.4
 "
