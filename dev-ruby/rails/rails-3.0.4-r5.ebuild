@@ -31,7 +31,7 @@ ruby_add_rdepend "
 	dev-ruby/activerecord:${RAILS_PV}
 	dev-ruby/activeresource:${RAILS_PV}
 	dev-ruby/activesupport:${RAILS_PV}
-	=dev-ruby/bundler-1.0*
+	dev-ruby/bundler
 	dev-ruby/railties:${RAILS_PV}"
 
 all_ruby_install() {
