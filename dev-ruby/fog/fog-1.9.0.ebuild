@@ -24,7 +24,7 @@ ruby_add_rdepend "
 	>=dev-ruby/formatador-0.2.4
 	>=dev-ruby/multi_json-1.7.2
 	dev-ruby/mime-types
-	>=dev-ruby/net-ssh-2.6.5
+	>=dev-ruby/net-ssh-2.1.4
 	>=dev-ruby/net-scp-1.0.4
 	>=dev-ruby/nokogiri-1.5.6
 	dev-ruby/ruby-hmac
