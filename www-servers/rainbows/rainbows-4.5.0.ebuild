@@ -4,7 +4,7 @@
 
 EAPI=4
 
-USE_RUBY="ruby18"
+USE_RUBY="ruby18 ruby19"
 
 RUBY_FAKEGEM_TASK_DOC=""
 RUBY_FAKEGEM_TASK_TEST=""
@@ -23,7 +23,7 @@ ruby_add_bdepend "
   >=dev-ruby/kgio-2.6
   dev-ruby/rack
   >=dev-ruby/raindrops-0.7
-  >=www-servers/unicorn-4.1
+  >=www-servers/unicorn-4.6
 "
 
 all_ruby_install() {
