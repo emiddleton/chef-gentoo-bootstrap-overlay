@@ -24,5 +24,5 @@ IUSE=""
 
 ruby_add_bdepend "
   >=dev-ruby/sequel-3.28:3
-  ~dev-ruby/railties-3.2.0:3.2
+  >=dev-ruby/railties-3.2.0:3.2
 "
