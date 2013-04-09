@@ -16,7 +16,7 @@ RUBY_S="wycats-${PN}-*"
 inherit ruby-fakegem
 
 GITHUB_USER="wycats"
-COMMIT="a5a6d42e480cebe97f9669e2342bb5c34ede0b88"
+COMMIT="2c3e3bb4a633b8e4d3dee72937e4d4ae26487f47"
 
 DESCRIPTION="A scripting framework that replaces rake and sake"
 HOMEPAGE="http://github.com/wycats/thor"
