@@ -4,14 +4,14 @@
 
 EAPI=3
 
-USE_RUBY="ruby18"
+USE_RUBY="ruby18 ruby19"
 
 inherit ruby-fakegem
 
 DESCRIPTION="Library for calculating weekly time differences between timezones"
 HOMEPAGE="https://github.com/emiddleton/availability"
 SRC_URI="https://github.com/emiddleton/availability/tarball/v${PV} -> ${P}.tar.gz"
-S="${WORKDIR}/emiddleton-${PN}-*"
+RUBY_S="emiddleton-${PN}-*"
 
 LICENSE="MIT"
 SLOT="0"
