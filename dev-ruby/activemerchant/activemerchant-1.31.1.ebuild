@@ -20,10 +20,11 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 ruby_add_bdepend "
-  >=dev-ruby/active_utils-1.0.2
   >=dev-ruby/activesupport-2.3.14
+  dev-ruby/i18n
+  dev-ruby/money
   dev-ruby/builder
   >=dev-ruby/json-1.5.1
-  dev-ruby/money
+  >=dev-ruby/active_utils-1.0.2
   dev-ruby/nokogiri
 "
