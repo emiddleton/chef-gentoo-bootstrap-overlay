@@ -21,11 +21,11 @@ HOMEPAGE="http://github.com/ttilley/fssm"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
-IUSE=""
+IUSE="inotify"
 
 # rb-inotify is a Linux-specific extension, so we will need to make this
 # conditional when keywords are added that are not linux-specific.
-ruby_add_rdepend "kernel_linux? ( >=dev-ruby/rb-inotify-0.8.6-r1 )"
+ruby_add_rdepend "inotify? ( >=dev-ruby/rb-inotify-0.8.6-r1 )"
 
 all_ruby_prepare() {
 	# Remove bundler support
