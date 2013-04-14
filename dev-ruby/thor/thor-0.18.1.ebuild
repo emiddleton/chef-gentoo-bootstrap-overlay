@@ -11,17 +11,10 @@ RUBY_FAKEGEM_DOCDIR="rdoc"
 RUBY_FAKEGEM_EXTRADOC="CHANGELOG.md README.md"
 RUBY_FAKEGEM_BINWRAP="thor"
 
-RUBY_S="wycats-${PN}-*"
-
 inherit ruby-fakegem
-
-GITHUB_USER="wycats"
-COMMIT="2c3e3bb4a633b8e4d3dee72937e4d4ae26487f47"
 
 DESCRIPTION="A scripting framework that replaces rake and sake"
 HOMEPAGE="http://github.com/wycats/thor"
-
-SRC_URI="http://github.com/${GITHUB_USER}/${PN}/tarball/${COMMIT} -> ${PN}-git-${PV}.tgz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -39,12 +32,7 @@ ruby_add_bdepend "
 	)"
 
 all_ruby_prepare() {
-	# Remove rspec default options (as we might not have the last
-	# rspec).
-	rm .rspec || die
-
 	# Remove Bundler
-	rm Gemfile || die
 	sed -i -e '/[Bb]undler/d' Thorfile || die
 
 	# Remove mandatory coverage collection using simplecov which is not
