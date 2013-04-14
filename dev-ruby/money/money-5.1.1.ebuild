@@ -7,6 +7,7 @@ EAPI=4
 USE_RUBY="ruby19"
 
 RUBY_FAKEGEM_EXTRADOC="CHANGELOG.md README.md"
+RUBY_FAKEGEM_EXTRAINSTALL="config"
 
 inherit ruby-fakegem
 
