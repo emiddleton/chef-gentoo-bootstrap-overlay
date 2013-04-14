@@ -25,7 +25,7 @@ SRC_URI="http://github.com/${GITHUB_USER}/${PN}/tarball/${COMMIT} -> ${PN}-git-$
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm"
+KEYWORDS="~x86 ~amd64 ~arm"
 IUSE="doc"
 
 ruby_add_bdepend "
