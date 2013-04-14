@@ -10,7 +10,6 @@ inherit ruby-fakegem
 
 DESCRIPTION="Common utils used by active_merchant, active_fulfillment, etc."
 HOMEPAGE="http://github.com/shopify/active_utils"
-SRC_URI=""
 
 LICENSE="MIT"
 SLOT="0"
