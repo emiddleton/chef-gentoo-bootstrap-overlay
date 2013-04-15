@@ -27,7 +27,7 @@ each_ruby_configure() {
 each_ruby_compile() {
 	emake -Cext/msgpack || die
 
-	cp ext/msgpack/msgpack.so lib/ || die "Unable to install msgpack library."
+	cp ext/msgpack/msgpack.so lib/msgpack || die "Unable to install msgpack library."
 }
 
 each_ruby_test() {
