@@ -8,13 +8,15 @@ USE_RUBY="ruby18 ruby19"
 
 inherit ruby-fakegem
 
-DESCRIPTION="Distribution of the V8 JavaScript engine"
-HOMEPAGE="http://github.com/cowboyd/libv8"
+DESCRIPTION="Embed the V8 JavaScript interpreter into Ruby"
+HOMEPAGE="http://github.com/cowboyd/therubyracer"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-DEPEND="dev-lang/v8"
-RDEPEND="${DEPEND}"
+ruby_add_bdepend "
+  dev-ruby/ref
+  >=dev-ruby/libv8-3.11.8.12
+"

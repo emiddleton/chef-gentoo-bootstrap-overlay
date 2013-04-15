@@ -8,13 +8,14 @@ USE_RUBY="ruby18 ruby19"
 
 inherit ruby-fakegem
 
-DESCRIPTION="Distribution of the V8 JavaScript engine"
-HOMEPAGE="http://github.com/cowboyd/libv8"
+DESCRIPTION="Library that implements weak, soft, and strong references in Ruby."
+HOMEPAGE="http://github.com/bdurand/ref"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-DEPEND="dev-lang/v8"
+DEPEND=""
 RDEPEND="${DEPEND}"
+
