@@ -4,7 +4,7 @@
 
 EAPI=4
 
-USE_RUBY="ruby18"
+USE_RUBY="ruby18 ruby19"
 
 RUBY_FAKEGEM_EXTRADOC="README.md"
 RUBY_FAKEGEM_EXTRAINSTALL="VERSION templates rails spec"
