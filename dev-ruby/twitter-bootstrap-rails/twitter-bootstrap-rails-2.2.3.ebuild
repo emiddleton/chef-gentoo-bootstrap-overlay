@@ -5,6 +5,8 @@
 EAPI=4
 USE_RUBY="ruby18 ruby19"
 
+RUBY_FAKEGEM_EXTRAINSTALL="app"
+
 inherit ruby-fakegem
 
 DESCRIPTION="Bootstrap CSS toolkit for Rails 3.1 Asset Pipeline"
