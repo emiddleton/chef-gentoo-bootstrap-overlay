@@ -6,6 +6,8 @@ EAPI=4
 
 USE_RUBY="ruby18 ruby19"
 
+RUBY_FAKEGEM_EXTRAINSTALL="app README.md test config"
+
 inherit ruby-fakegem
 
 DESCRIPTION="CSS stylesheet splitter for Rails"
