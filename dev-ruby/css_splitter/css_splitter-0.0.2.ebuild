@@ -13,7 +13,7 @@ HOMEPAGE="https://github.com/zweilove/css_splitter"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 ruby_add_bdepend "
