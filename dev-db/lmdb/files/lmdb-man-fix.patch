@@ -1,0 +1,12 @@
+diff -uNr sky-deps.orig/lmdb/Makefile sky-deps/lmdb/Makefile
+--- sky-deps.orig/lmdb/Makefile	2013-06-06 16:24:47.728332169 +0900
++++ sky-deps/lmdb/Makefile	2013-06-06 16:25:07.888432138 +0900
+@@ -17,7 +17,7 @@
+ 	cp $(IPROGS) $(DESTDIR)$(prefix)/bin
+ 	cp $(ILIBS) $(DESTDIR)$(prefix)/lib
+ 	cp $(IHDRS) $(DESTDIR)$(prefix)/include
+-	cp $(IDOCS) $(DESTDIR)$(prefix)/man/man1
++	cp $(IDOCS) $(DESTDIR)$(prefix)/share/man/man1
+ 
+ clean:
+ 	rm -rf $(PROGS) *.[ao] *.so *~ testdb
