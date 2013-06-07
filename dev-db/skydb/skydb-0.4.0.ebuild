@@ -39,5 +39,5 @@ src_install() {
 	exeinto /usr/bin
 	newexe skyd.bin skyd
     mkdir -p ${D}/usr/$(get_libdir)/go/src/pkg
-  	cp -r ${WORKDIR}/src ${D}/usr/$(get_libdir)/go/src/pkg
+  	cp -r ${WORKDIR}/src/github.com ${D}/usr/$(get_libdir)/go/src/pkg
 }
