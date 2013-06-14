@@ -4,16 +4,15 @@
 
 EAPI=4
 
-EGIT_REPO_URI="git://github.com/skydb/sky.go.git"
-EGIT_BRANCH="unstable"
+EGIT_REPO_URI="git://github.com/nu7hatch/gouuid.git"
 
 inherit eutils multilib git-2
 
-DESCRIPTION="Go client for the Sky database"
-HOMEPAGE="https://github.com/skydb/sky.go"
+DESCRIPTION=""
+HOMEPAGE=""
 SRC_URI=""
 
-LICENSE="MIT"
+LICENSE=""
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
@@ -21,7 +20,7 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}"
 
-S=${WORKDIR}/src/github.com/skydb/sky.go
+S=${WORKDIR}/src/github.com/nu7hatch/gouuid
 
 src_install() {
 	mkdir -p ${D}/usr/$(get_libdir)/go/src

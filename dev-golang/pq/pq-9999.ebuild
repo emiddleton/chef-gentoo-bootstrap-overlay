@@ -4,13 +4,12 @@
 
 EAPI=4
 
-EGIT_REPO_URI="git://github.com/skydb/sky.go.git"
-EGIT_BRANCH="unstable"
+EGIT_REPO_URI="git://github.com/bmizerany/pq.git"
 
 inherit eutils multilib git-2
 
-DESCRIPTION="Go client for the Sky database"
-HOMEPAGE="https://github.com/skydb/sky.go"
+DESCRIPTION="A pure GO postgres driver"
+HOMEPAGE="http://github.com/bmizerany/pq"
 SRC_URI=""
 
 LICENSE="MIT"
@@ -21,7 +20,7 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}"
 
-S=${WORKDIR}/src/github.com/skydb/sky.go
+S=${WORKDIR}/src/github.com/bmizerany/pq
 
 src_install() {
 	mkdir -p ${D}/usr/$(get_libdir)/go/src
