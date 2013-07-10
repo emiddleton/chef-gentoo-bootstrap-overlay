@@ -7,7 +7,7 @@ EAPI=4
 inherit multilib
 
 DESCRIPTION="Go wrapper for LMDB"
-HOMEPAGE="https://github.com/benbjohnson/gomdb"
+HOMEPAGE="https://github.com/szferi/gomdb"
 SRC_URI=""
 
 LICENSE="BSD"
@@ -24,7 +24,7 @@ src_unpack() {
 
 src_compile() {
 	mkdir -p ${WORKDIR}/usr/$(get_libdir)/go/src
-	GOPATH=${WORKDIR}/usr/$(get_libdir)/go go get github.com/benbjohnson/gomdb
+	GOPATH=${WORKDIR}/usr/$(get_libdir)/go go get github.com/szferi/gomdb
 }
 
 src_install() {
