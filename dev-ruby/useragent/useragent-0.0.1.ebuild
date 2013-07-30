@@ -6,9 +6,9 @@ EAPI=4
 
 USE_RUBY="ruby19"
 
+RUBY_FAKEGEM_NAME="${PN}.rb"
 RUBY_FAKEGEM_EXTRADOC="README.md"
 RUBY_FAKEGEM_EXTRAINSTALL="data"
-
 inherit ruby-fakegem
 
 DESCRIPTION="Library for extracting marketing attribution data from referer URLs"
