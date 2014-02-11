@@ -16,5 +16,5 @@ HOMEPAGE="https://github.com/werein/x-editable-rails"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
