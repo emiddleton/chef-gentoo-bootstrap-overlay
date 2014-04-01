@@ -411,8 +411,8 @@ src_configure() {
 
 	if use nginx_modules_http_lua; then
 		http_enabled=1
-		myconf+=" --add-module=${DEVEL_KIT_MODULE_WD}"
-		myconf+=" --add-module=${HTTP_LUA_MODULE_WD}"
+		devkit_enabled=1
+		devkit_myconf+=" --add-module=${HTTP_LUA_MODULE_WD}"
 	fi
 
 	if use nginx_modules_http_auth_pam; then
@@ -462,6 +462,10 @@ src_configure() {
 
 	if use http || use http-cache; then
 		http_enabled=1
+	fi
+
+	if [ $devkit_enabled ]; then
+		myconf+=" --add-module=${DEVEL_KIT_MODULE_WD} ${devkit_myconf}"
 	fi
 
 	if [ $http_enabled ]; then
