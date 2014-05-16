@@ -4,7 +4,7 @@
 
 EAPI=3
 
-inherit distutils flag-o-matic git
+inherit distutils flag-o-matic git-2
 
 EGIT_REPO_URI="git://github.com/emiddleton/WAL-E.git"
 
