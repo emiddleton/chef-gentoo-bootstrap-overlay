@@ -48,7 +48,7 @@ HTTP_SLOWFS_CACHE_MODULE_URI="http://labs.frickle.com/files/ngx_slowfs_cache-${H
 HTTP_SLOWFS_CACHE_MODULE_WD="${WORKDIR}/ngx_slowfs_cache-${HTTP_SLOWFS_CACHE_MODULE_PV}"
 
 # set_misc_module ( https://github.com/agentzh/set-misc-nginx-module )
-HTTP_SET_MISC_MODULE_PV="0.22rc8"
+HTTP_SET_MISC_MODULE_PV="0.26"
 HTTP_SET_MISC_MODULE_P="nginx_set_misc_module-${HTTP_SET_MISC_MODULE_PV}"
 HTTP_SET_MISC_MODULE_URI="https://github.com/agentzh/set-misc-nginx-module/archive/v${HTTP_SET_MISC_MODULE_PV}.tar.gz"
 HTTP_SET_MISC_MODULE_WD="${WORKDIR}/set-misc-nginx-module-${HTTP_SET_MISC_MODULE_PV}"
@@ -392,8 +392,10 @@ src_configure() {
 
 	if use nginx_modules_http_set_misc; then
 		http_enabled=1
-		devkit_enabled=1
-		devkit_myconf+="--add-module=${HTTP_SET_MISC_MODULE_WD}"
+		if use !nginx_modules_http_lua; then
+			myconf+=" --add-module=${DEVEL_KIT_MODULE_WD}"
+		fi
+		myconf+=" --add-module=${HTTP_SET_MISC_MODULE_WD}"
 
 	fi
 	if use nginx_modules_http_accept_language; then
