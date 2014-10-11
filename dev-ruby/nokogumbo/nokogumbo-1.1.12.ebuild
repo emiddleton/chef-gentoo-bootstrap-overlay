@@ -19,7 +19,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-ruby_add_rdepend "dev-ruby/nikogiri"
+ruby_add_rdepend "dev-ruby/nokogiri"
 
 each_ruby_configure() {
 	${RUBY} -Cext/nokogumboc extconf.rb || die
