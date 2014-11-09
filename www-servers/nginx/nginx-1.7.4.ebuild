@@ -392,9 +392,7 @@ src_configure() {
 
 	if use nginx_modules_http_set_misc; then
 		http_enabled=1
-		if use !nginx_modules_http_lua; then
-			myconf+=" --add-module=${DEVEL_KIT_MODULE_WD}"
-		fi
+		myconf+=" --add-module=${DEVEL_KIT_MODULE_WD}"
 		myconf+=" --add-module=${HTTP_SET_MISC_MODULE_WD}"
 
 	fi

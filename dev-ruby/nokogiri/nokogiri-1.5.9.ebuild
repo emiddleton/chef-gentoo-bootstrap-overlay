@@ -9,6 +9,7 @@ USE_RUBY="ruby18 ruby19 ree18 jruby"
 RUBY_FAKEGEM_TASK_DOC="docs"
 RUBY_FAKEGEM_DOCDIR="doc"
 RUBY_FAKEGEM_EXTRADOC="CHANGELOG.rdoc CHANGELOG.ja.rdoc README.rdoc README.ja.rdoc ROADMAP.md STANDARD_RESPONSES.md"
+RUBY_FAKEGEM_EXTRAINSTALL="ext"
 
 inherit ruby-fakegem eutils multilib
 
