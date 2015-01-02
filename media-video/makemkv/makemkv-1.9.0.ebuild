@@ -34,10 +34,6 @@ DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/makemkv-oss-${PV}
 
-#src_prepare() {
-#	epatch "${FILESDIR}"/${P}-makefile.linux.patch
-#}
-
 src_configure() {
 	replace-flags -O* -Os
 	if [[ -x ${ECONF_SOURCE:-.}/configure ]] ; then
