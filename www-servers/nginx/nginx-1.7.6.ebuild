@@ -57,13 +57,13 @@ HTTP_SET_MISC_MODULE_WD="${WORKDIR}/set-misc-nginx-module-${HTTP_SET_MISC_MODULE
 HTTP_ACCEPT_LANGUAGE_MODULE_PV="0.0.1"
 HTTP_ACCEPT_LANGUAGE_MODULE_P="nginx_accept_language_module-${HTTP_ACCEPT_LANGUAGE_MODULE_PV}"
 HTTP_ACCEPT_LANGUAGE_MODULE_URI="https://github.com/emiddleton/nginx_accept_language_module/archive/v${HTTP_ACCEPT_LANGUAGE_MODULE_PV}.tar.gz"
-HTTP_ACCEPT_LANGUAGE_MODULE_WD="${WORKDIR}/emiddleton-nginx_accept_language_module-3ad71b1"
+HTTP_ACCEPT_LANGUAGE_MODULE_WD="${WORKDIR}/nginx_accept_language_module-${HTTP_ACCEPT_LANGUAGE_MODULE_PV}"
 
 # x_rid_header ( https://github.com/emiddleton/nginx-x-rid-header )
 HTTP_X_RID_HEADER_MODULE_PV="0.0.1"
 HTTP_X_RID_HEADER_MODULE_P="nginx-x-rid-header-${HTTP_X_RID_HEADER_MODULE_PV}"
 HTTP_X_RID_HEADER_MODULE_URI="https://github.com/emiddleton/nginx-x-rid-header/archive/v${HTTP_X_RID_HEADER_MODULE_PV}.tar.gz"
-HTTP_X_RID_HEADER_MODULE_WD="${WORKDIR}/emiddleton-nginx-x-rid-header-ce88ca6"
+HTTP_X_RID_HEADER_MODULE_WD="${WORKDIR}/nginx-x-rid-header-${HTTP_X_RID_HEADER_MODULE_PV}"
 
 # http_fancyindex (https://github.com/aperezdc/ngx-fancyindex, BSD license)
 HTTP_FANCYINDEX_MODULE_PV="0.3.4"
