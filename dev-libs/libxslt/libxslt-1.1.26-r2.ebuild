@@ -7,7 +7,7 @@ PYTHON_DEPEND="python? 2"
 SUPPORT_PYTHON_ABIS="1"
 RESTRICT_PYTHON_ABIS="3.* *-jython"
 
-inherit autotools eutils python toolchain-funcs
+inherit autotools eutils python-r1 toolchain-funcs
 
 DESCRIPTION="XSLT libraries and tools"
 HOMEPAGE="http://www.xmlsoft.org/"
